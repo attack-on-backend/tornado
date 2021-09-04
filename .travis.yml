@@ -11,7 +11,7 @@ branches:
     - master
 env:
   global:
-    - GH_REF: github.com/attack-on-backend/algorithm.git
+    - GH_REF: github.com/attack-on-backend/tornado.git
 script:
   - bash summary_create.sh
   - travis_wait 100 bash deploy.sh
