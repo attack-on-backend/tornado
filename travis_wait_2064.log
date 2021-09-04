@@ -1,0 +1,16 @@
+Switched to a new branch 'gitbook'
+On branch gitbook
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   04-源码篇/02-IOLoop.md
+	modified:   04-源码篇/README.md
+	modified:   05-深入篇/README.md
+	modified:   SUMMARY.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	node_modules/
+	travis_wait_2064.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
