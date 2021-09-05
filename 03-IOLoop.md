@@ -581,6 +581,7 @@ def _add_callback(self, handle):
 ```python
     end_time = self.time() + self._clock_resolution
     # 当有定时任务, 且定时任务到了执行时间时, 就会将它放入到self._ready中去执行
+    # 实际上这里处理的任务, 基本都是TimerHandler
     while self._scheduled:
         handle = self._scheduled[0]
         if handle._when >= end_time:
