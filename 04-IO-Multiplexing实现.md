@@ -1,5 +1,8 @@
 # Attack on Tornado - IO Multiplexing实现 🌪
 
+
+<extoc></extoc>
+
 ## 前言
 
 这一章中我们来用 `Python` 实现 IO Multiplexing 也就是IO多路复用
