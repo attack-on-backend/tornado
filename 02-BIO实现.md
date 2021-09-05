@@ -1,5 +1,8 @@
 # Attack on Tornado - BIO实现 🌪
 
+
+<extoc></extoc>
+
 ## 前言
 
 这一章中我们来用 `Python` 实现 BIO (Blocking IO) 也就是阻塞IO
