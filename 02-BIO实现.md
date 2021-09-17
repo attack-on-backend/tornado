@@ -38,7 +38,7 @@ if __name__ == '__main__':
     server('localhost', 8888)
 ```
 
-`bio_client.py`
+`http_client.py.py`
 
 ```python
 import socket

@@ -50,7 +50,7 @@ if __name__ == '__main__':
     server('localhost', 8888)
 ```
 
-`iom_client.py`
+`http_client.py.py`
 
 ```python
 import socket

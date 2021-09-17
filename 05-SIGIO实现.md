@@ -62,7 +62,7 @@ if __name__ == '__main__':
     server('localhost', 8888)
 ```
 
-`udp_sigio_client.py`
+`http_client.py.py`
 
 ```python
 import json
