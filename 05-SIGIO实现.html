@@ -1,0 +1,639 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>SIGIO实现 · 进击的Tornado</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Lyon">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchor-navigation-ex-toc/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="06-AIO实现.html" />
+    
+    
+    <link rel="prev" href="04-IO-Multiplexing实现.html" />
+    
+
+    
+        <link rel="shortcut icon" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="apple-touch-icon" href='assets/images/favicom.jpg'>
+    
+    
+        
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicom.jpg">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicom.jpg">
+        
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"attack-on-backend/tornado","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="01-IO模型.html">
+            
+                <a href="01-IO模型.html">
+            
+                    
+                    IO模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="02-BIO实现.html">
+            
+                <a href="02-BIO实现.html">
+            
+                    
+                    BIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="03-NIO实现.html">
+            
+                <a href="03-NIO实现.html">
+            
+                    
+                    NIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="04-IO-Multiplexing实现.html">
+            
+                <a href="04-IO-Multiplexing实现.html">
+            
+                    
+                    IO-Multiplexing实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="05-SIGIO实现.html">
+            
+                <a href="05-SIGIO实现.html">
+            
+                    
+                    SIGIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="06-AIO实现.html">
+            
+                <a href="06-AIO实现.html">
+            
+                    
+                    AIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="07-生成器.html">
+            
+                <a href="07-生成器.html">
+            
+                    
+                    生成器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="08-协程.html">
+            
+                <a href="08-协程.html">
+            
+                    
+                    协程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="09-AIO协程实现.html">
+            
+                <a href="09-AIO协程实现.html">
+            
+                    
+                    AIO协程实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="09-asyncio.html">
+            
+                <a href="09-asyncio.html">
+            
+                    
+                    asyncio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="10-IOLoop.html">
+            
+                <a href="10-IOLoop.html">
+            
+                    
+                    IOLoop
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >SIGIO实现</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---sigio&#x5B9E;&#x73B0;-&#x1F32A;"><b></b>Attack on Tornado - SIGIO&#x5B9E;&#x73B0; &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#udp-sigio"><b></b>UDP SIGIO</a></li><li><span class="title-icon "></span><a href="#tcp-sigio"><b></b>TCP SIGIO</a></li></ul></ul></div><a href="#attack-on-tornado---sigio&#x5B9E;&#x73B0;-&#x1F32A;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="attack-on-tornado---sigio&#x5B9E;&#x73B0;-&#x1F32A;"><a name="attack-on-tornado---sigio&#x5B9E;&#x73B0;-&#x1F32A;" class="anchor-navigation-ex-anchor" href="#attack-on-tornado---sigio&#x5B9E;&#x73B0;-&#x1F32A;"><i class="fa fa-link" aria-hidden="true"></i></a>Attack on Tornado - SIGIO&#x5B9E;&#x73B0; &#x1F32A;</h1>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---sigio&#x5B9E;&#x73B0;-&#x1F32A;"><b></b>Attack on Tornado - SIGIO&#x5B9E;&#x73B0; &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#udp-sigio"><b></b>UDP SIGIO</a></li><li><span class="title-icon "></span><a href="#tcp-sigio"><b></b>TCP SIGIO</a></li></ul></ul></div>
+
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
+<p>&#x8FD9;&#x4E00;&#x7AE0;&#x4E2D;&#x6211;&#x4EEC;&#x6765;&#x7528; <code>Python</code> &#x5B9E;&#x73B0; <code>SIGIO</code> , &#x4E5F;&#x5C31;&#x662F;&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO (<code>Signal driven IO</code>) , &#x6211;&#x4EEC;&#x9700;&#x8981;&#x501F;&#x52A9;&#x4E24;&#x4E2A;&#x6807;&#x51C6;&#x5E93; : </p>
+<ul>
+<li>signal : &#x4FE1;&#x53F7;&#x652F;&#x6301;</li>
+<li>fcntl : &#x8BBE;&#x7F6E;&#x975E;&#x963B;&#x585E;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;</li>
+</ul>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO&#x5BF9;&#x4E8E; <code>TCP</code> &#x5957;&#x63A5;&#x5B57;&#x7684;&#x4F5C;&#x7528;&#x5E76;&#x4E0D;&#x5927; , &#x56E0;&#x4E3A;&#x5728; <code>TCP</code> &#x4E2D; <code>SIGIO</code> &#x4FE1;&#x53F7;&#x4EA7;&#x751F;&#x7684;&#x6761;&#x4EF6;&#x6709;&#x5F88;&#x591A; : </p>
+<ul>
+<li>&#x76D1;&#x542C;&#x5957;&#x63A5;&#x5B57;&#x4E0A;&#x67D0;&#x4E2A;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;</li>
+<li>&#x67D0;&#x4E2A;&#x65AD;&#x8FDE;&#x8BF7;&#x6C42;&#x5DF2;&#x7ECF;&#x53D1;&#x8D77;</li>
+<li>&#x67D0;&#x4E2A;&#x65AD;&#x8FDE;&#x8BF7;&#x6C42;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;</li>
+<li>&#x67D0;&#x4E2A;&#x8FDE;&#x63A5;&#x534A;&#x5173;&#x95ED;</li>
+<li>&#x6570;&#x636E;&#x5230;&#x8FBE;&#x5957;&#x63A5;&#x5B57;</li>
+<li>&#x6570;&#x636E;&#x5DF2;&#x7ECF;&#x4ECE;&#x5957;&#x63A5;&#x5B57;&#x53D1;&#x9001;&#x8D70;</li>
+<li>&#x5957;&#x63A5;&#x5B57;&#x4E0A;&#x53D1;&#x751F;&#x5F02;&#x6B65;&#x9519;&#x8BEF;</li>
+</ul>
+<p>&#x5F53;&#x7136;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>SIGIO</code> &#x6765;&#x76D1;&#x542C;&#x5957;&#x63A5;&#x5B57;</p>
+<p>&#x800C;&#x5728; <code>UDP</code> &#x4E2D; <code>SIGIO</code> &#x4FE1;&#x53F7;&#x4EA7;&#x751F;&#x7684;&#x6761;&#x4EF6;&#x4EC5;&#x4EC5; : </p>
+<ul>
+<li>&#x6570;&#x636E;&#x5230;&#x8FBE;&#x5957;&#x63A5;&#x5B57;</li>
+<li>&#x5957;&#x63A5;&#x5B57;&#x4E0A;&#x53D1;&#x751F;&#x5F02;&#x6B65;&#x9519;&#x8BEF;</li>
+</ul>
+<h2 id="udp-sigio"><a name="udp-sigio" class="anchor-navigation-ex-anchor" href="#udp-sigio"><i class="fa fa-link" aria-hidden="true"></i></a>UDP SIGIO</h2>
+<p>&#x6211;&#x4EEC;&#x5148;&#x6765;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A; <code>UDP</code> &#x7684; <code>SIGIO</code> </p>
+<p><code>udp_sigio_server.py</code></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> fcntl
+<span class="hljs-keyword">import</span> signal
+<span class="hljs-keyword">import</span> socket
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">server</span><span class="hljs-params">(host, port)</span>:</span>
+    sock = socket.socket(type=socket.SOCK_DGRAM)
+    sock.setblocking(<span class="hljs-keyword">False</span>)
+    sock.bind((host, port))
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">receive_signal</span><span class="hljs-params">(signum, stack)</span>:</span>
+        data, addr = sock.recvfrom(<span class="hljs-number">1024</span>)
+        data = data.decode(<span class="hljs-string">&apos;utf-8&apos;</span>)
+        print(data)
+
+    signal.signal(signal.SIGIO, receive_signal)
+    fcntl.fcntl(sock.fileno(), fcntl.F_SETOWN, os.getpid())
+    fcntl.fcntl(sock.fileno(), fcntl.F_SETFL, fcntl.fcntl(sock.fileno(), fcntl.F_GETFL, <span class="hljs-number">0</span>) | fcntl.FASYNC)
+
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        print(<span class="hljs-string">&apos;Waiting...&apos;</span>)
+        time.sleep(<span class="hljs-number">3</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    server(<span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>)
+</code></pre>
+<p><code>http_client.py.py</code></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> datetime
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">client</span><span class="hljs-params">(host, port)</span>:</span>
+    sock = socket.socket(type=socket.SOCK_DGRAM)
+    data = {
+        <span class="hljs-string">&apos;send_user&apos;</span>: <span class="hljs-string">&apos;Lyon&apos;</span>,
+        <span class="hljs-string">&apos;send_time&apos;</span>: datetime.datetime.now().strftime(<span class="hljs-string">&apos;%Y-%m-%d %H:%M:%S&apos;</span>),
+        <span class="hljs-string">&apos;send_msg&apos;</span>: <span class="hljs-string">&apos;BIO test...&apos;</span>
+    }
+    sock.sendto(json.dumps(data).encode(<span class="hljs-string">&apos;utf-8&apos;</span>), (host, port))
+    sock.close()
+    print(<span class="hljs-string">&apos;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x6570;&#x636E;&#x6210;&#x529F;...&apos;</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    client(<span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>)
+</code></pre>
+<h2 id="tcp-sigio"><a name="tcp-sigio" class="anchor-navigation-ex-anchor" href="#tcp-sigio"><i class="fa fa-link" aria-hidden="true"></i></a>TCP SIGIO</h2>
+<p><code>tcp_sigio_server.py</code></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> fcntl
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> signal
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">server</span><span class="hljs-params">(host, port)</span>:</span>
+    sock = socket.socket()
+    sock.setblocking(<span class="hljs-keyword">False</span>)
+    sock.bind((host, port))
+    sock.listen()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">receive_signal</span><span class="hljs-params">(signum, stack)</span>:</span>
+        <span class="hljs-keyword">try</span>:
+            conn, addr = sock.accept()
+            data = conn.recv(<span class="hljs-number">1024</span>).decode(<span class="hljs-string">&apos;utf-8&apos;</span>)
+            print(data)
+            conn.close()
+        <span class="hljs-keyword">except</span> BlockingIOError:
+            <span class="hljs-keyword">pass</span>
+
+    signal.signal(signal.SIGIO, receive_signal)
+    fcntl.fcntl(sock.fileno(), fcntl.F_SETOWN, os.getpid())
+    fcntl.fcntl(sock.fileno(), fcntl.F_SETFL, fcntl.fcntl(sock.fileno(), fcntl.F_GETFL, <span class="hljs-number">0</span>) | fcntl.FASYNC)
+
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        print(<span class="hljs-string">&apos;Waiting...&apos;</span>)
+        time.sleep(<span class="hljs-number">3</span>)
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    server(<span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>)
+</code></pre>
+<p>TODO : &#x5355;&#x7EBF;&#x7A0B;&#x4E0B;&#x5B58;&#x5728;&#x95EE;&#x9898; , &#x6682;&#x65F6;&#x8FD8;&#x6CA1;&#x5F04;&#x6E05;&#x695A;</p>
+<p>&#x5728; <code>Mac</code> &#x73AF;&#x5883;&#x4E0B; , &#x591A;&#x7EBF;&#x7A0B;&#x7248;&#x672C;&#x6682;&#x65F6;&#x6CA1;&#x53D1;&#x73B0;&#x95EE;&#x9898; </p>
+<p><code>thread_tcp_sigio_server.py</code></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> fcntl
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> signal
+<span class="hljs-keyword">import</span> threading
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle_conn</span><span class="hljs-params">(conn, addr)</span>:</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+        <span class="hljs-keyword">try</span>:
+            data = conn.recv(<span class="hljs-number">1024</span>).decode(<span class="hljs-string">&apos;utf-8&apos;</span>)
+            print(<span class="hljs-string">&apos;&#x7EBF;&#x7A0B; %s &#x5904;&#x7406;&#x6765;&#x81EA; %s-%s &#x7684;&#x8FDE;&#x63A5;...&apos;</span> % (threading.currentThread().getName(), addr[<span class="hljs-number">0</span>], addr[<span class="hljs-number">1</span>]))
+            print(data)
+            conn.close()
+            <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">except</span> BlockingIOError:
+            <span class="hljs-keyword">pass</span>
+    conn.close()
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">server</span><span class="hljs-params">(host, port)</span>:</span>
+    <span class="hljs-keyword">with</span> socket.socket() <span class="hljs-keyword">as</span> sock:
+        sock.setblocking(<span class="hljs-keyword">False</span>)
+        sock.bind((host, port))
+        sock.listen()
+
+        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">receive_signal</span><span class="hljs-params">(signum, stack)</span>:</span>
+            print(<span class="hljs-string">&apos;SIGIO...&apos;</span>)
+            <span class="hljs-keyword">try</span>:
+                conn, addr = sock.accept()
+                handle = threading.Thread(target=handle_conn, args=(conn, addr))
+                handle.start()
+            <span class="hljs-keyword">except</span> BlockingIOError:
+                <span class="hljs-keyword">pass</span>
+
+        signal.signal(signal.SIGIO, receive_signal)
+        fcntl.fcntl(sock.fileno(), fcntl.F_SETOWN, os.getpid())
+        fcntl.fcntl(sock.fileno(), fcntl.F_SETFL, fcntl.fcntl(sock.fileno(), fcntl.F_GETFL, <span class="hljs-number">0</span>) | fcntl.FASYNC)
+
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+            print(<span class="hljs-string">&apos;Waiting...&apos;</span>)
+            time.sleep(<span class="hljs-number">3</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    server(<span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>)
+</code></pre>
+<p><code>tcp_sigio_client.py</code></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> datetime
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">client</span><span class="hljs-params">(host, port)</span>:</span>
+    sock = socket.socket()
+    sock.connect((host, port))
+    data = {
+        <span class="hljs-string">&apos;send_user&apos;</span>: <span class="hljs-string">&apos;Lyon&apos;</span>,
+        <span class="hljs-string">&apos;send_time&apos;</span>: datetime.datetime.now().strftime(<span class="hljs-string">&apos;%Y-%m-%d %H:%M:%S&apos;</span>),
+        <span class="hljs-string">&apos;send_msg&apos;</span>: <span class="hljs-string">&apos;BIO test...&apos;</span>
+    }
+    sock.send(json.dumps(data).encode(<span class="hljs-string">&apos;utf-8&apos;</span>))
+    sock.close()
+    print(<span class="hljs-string">&apos;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x6570;&#x636E;&#x6210;&#x529F;...&apos;</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    client(<span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>)
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="04-IO-Multiplexing实现.html" class="navigation navigation-prev " aria-label="Previous page: IO-Multiplexing实现">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="06-AIO实现.html" class="navigation navigation-next " aria-label="Next page: AIO实现">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"SIGIO实现","level":"1.7","depth":1,"next":{"title":"AIO实现","level":"1.8","depth":1,"path":"06-AIO实现.md","ref":"06-AIO实现.md","articles":[]},"previous":{"title":"IO-Multiplexing实现","level":"1.6","depth":1,"path":"04-IO-Multiplexing实现.md","ref":"04-IO-Multiplexing实现.md","articles":[]},"dir":"ltr"},"config":{"plugins":["advanced-emoji","toggle-chapters","theme-comscore","splitter","github","github-buttons@2.1.0","-sharing","-lunr","-search","search-plus","anchor-navigation-ex-toc@0.0.9","editlink","fontsettings","copy-code-button","lightbox","favicon"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/attack-on-backend/tornado"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/attack-on-backend/tornado/blob/master"},"splitter":{},"anchor-navigation-ex-toc":{"associatedWithSummary":true,"float":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"highlight":{},"favicon":{"shortcut":"assets/images/favicom.jpg","bookmark":"assets/images/favicom.jpg","appleTouch":"assets/images/favicom.jpg","appleTouchMore":{"120x120":"assets/images/favicom.jpg","180x180":"assets/images/favicom.jpg"}},"lightbox":{"jquery":true,"sameUuid":false},"theme-comscore":{},"github-buttons":{"repo":"attack-on-backend/tornado","types":["star"],"size":"small"},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"search-plus":{}},"theme":"default","author":"Lyon","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":18,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"进击的Tornado","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null}},"gitbook":"*","description":"Attack on backend","extension":null},"file":{"path":"05-SIGIO实现.md","mtime":"2021-10-20T15:49:25.469Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-20T15:50:17.040Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

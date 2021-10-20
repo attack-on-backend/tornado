@@ -1,0 +1,1002 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>IOLoop · 进击的Tornado</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Lyon">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchor-navigation-ex-toc/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="09-asyncio.html" />
+    
+
+    
+        <link rel="shortcut icon" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="apple-touch-icon" href='assets/images/favicom.jpg'>
+    
+    
+        
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicom.jpg">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicom.jpg">
+        
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"attack-on-backend/tornado","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="01-IO模型.html">
+            
+                <a href="01-IO模型.html">
+            
+                    
+                    IO模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="02-BIO实现.html">
+            
+                <a href="02-BIO实现.html">
+            
+                    
+                    BIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="03-NIO实现.html">
+            
+                <a href="03-NIO实现.html">
+            
+                    
+                    NIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="04-IO-Multiplexing实现.html">
+            
+                <a href="04-IO-Multiplexing实现.html">
+            
+                    
+                    IO-Multiplexing实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="05-SIGIO实现.html">
+            
+                <a href="05-SIGIO实现.html">
+            
+                    
+                    SIGIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="06-AIO实现.html">
+            
+                <a href="06-AIO实现.html">
+            
+                    
+                    AIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="07-生成器.html">
+            
+                <a href="07-生成器.html">
+            
+                    
+                    生成器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="08-协程.html">
+            
+                <a href="08-协程.html">
+            
+                    
+                    协程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="09-AIO协程实现.html">
+            
+                <a href="09-AIO协程实现.html">
+            
+                    
+                    AIO协程实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="09-asyncio.html">
+            
+                <a href="09-asyncio.html">
+            
+                    
+                    asyncio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.13" data-path="10-IOLoop.html">
+            
+                <a href="10-IOLoop.html">
+            
+                    
+                    IOLoop
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >IOLoop</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---ioloop-&#x1F32A;"><b></b>Attack on Tornado - IOLoop &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4ECB;&#x7ECD;"><b></b>&#x4ECB;&#x7ECD;</a></li><li><span class="title-icon "></span><a href="#&#x5F00;&#x59CB;"><b></b>&#x5F00;&#x59CB;</a></li><li><span class="title-icon "></span><a href="#configurable"><b></b>Configurable</a></li><li><span class="title-icon "></span><a href="#listen"><b></b>listen</a></li><li><span class="title-icon "></span><a href="#addaccepthandler"><b></b>add_accept_handler</a></li><li><span class="title-icon "></span><a href="#addhandler"><b></b>add_handler</a></li><li><span class="title-icon "></span><a href="#handleevents"><b></b>_handle_events</a></li><li><span class="title-icon "></span><a href="#handleconnection"><b></b>_handle_connection</a></li><li><span class="title-icon "></span><a href="#runonce"><b></b>_run_once</a></li></ul></ul></div><a href="#attack-on-tornado---ioloop-&#x1F32A;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="attack-on-tornado---ioloop-&#x1F32A;"><a name="attack-on-tornado---ioloop-&#x1F32A;" class="anchor-navigation-ex-anchor" href="#attack-on-tornado---ioloop-&#x1F32A;"><i class="fa fa-link" aria-hidden="true"></i></a>Attack on Tornado - IOLoop &#x1F32A;</h1>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---ioloop-&#x1F32A;"><b></b>Attack on Tornado - IOLoop &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4ECB;&#x7ECD;"><b></b>&#x4ECB;&#x7ECD;</a></li><li><span class="title-icon "></span><a href="#&#x5F00;&#x59CB;"><b></b>&#x5F00;&#x59CB;</a></li><li><span class="title-icon "></span><a href="#configurable"><b></b>Configurable</a></li><li><span class="title-icon "></span><a href="#listen"><b></b>listen</a></li><li><span class="title-icon "></span><a href="#addaccepthandler"><b></b>add_accept_handler</a></li><li><span class="title-icon "></span><a href="#addhandler"><b></b>add_handler</a></li><li><span class="title-icon "></span><a href="#handleevents"><b></b>_handle_events</a></li><li><span class="title-icon "></span><a href="#handleconnection"><b></b>_handle_connection</a></li><li><span class="title-icon "></span><a href="#runonce"><b></b>_run_once</a></li></ul></ul></div>
+
+<h2 id="&#x4ECB;&#x7ECD;"><a name="&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4ECB;&#x7ECD;</h2>
+<p><code>IOLoop</code> &#x662F;&#x5F02;&#x6B65;&#x975E;&#x963B;&#x585E;&#x6A21;&#x578B;&#x7684;&#x5173;&#x952E;&#x6240;&#x5728; , &#x6211;&#x4EEC;&#x4EE5; <code>asyncio</code> &#x4E3A;&#x4F8B;&#x6765;&#x5206;&#x6790; <code>Tornado</code> &#x7684;&#x6E90;&#x7801;&#x5B9E;&#x73B0;</p>
+<h2 id="&#x5F00;&#x59CB;"><a name="&#x5F00;&#x59CB;" class="anchor-navigation-ex-anchor" href="#&#x5F00;&#x59CB;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5F00;&#x59CB;</h2>
+<p>&#x6211;&#x4EEC;&#x4F1A;&#x56F4;&#x7ED5;&#x5B98;&#x65B9;&#x7684;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x6765;&#x8FDB;&#x884C;&#x6E90;&#x7801;&#x5206;&#x6790; , &#x793A;&#x4F8B;&#x5982;&#x4E0B; : </p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> tornado.ioloop
+<span class="hljs-keyword">import</span> tornado.web
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainHandler</span><span class="hljs-params">(tornado.web.RequestHandler)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self)</span>:</span>
+        self.write(<span class="hljs-string">&quot;Hello, world&quot;</span>)
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    application = tornado.web.Application([
+        (<span class="hljs-string">r&quot;/&quot;</span>, MainHandler),
+    ])
+    application.listen(<span class="hljs-number">8888</span>)
+    tornado.ioloop.IOLoop.current().start()
+</code></pre>
+<p>&#x4E3A;&#x4E86;&#x8282;&#x7701;&#x7BC7;&#x5E45; , &#x4F1A;&#x7701;&#x7565;&#x90E8;&#x5206;&#x5B98;&#x65B9;&#x6CE8;&#x91CA; , &#x56E0;&#x4E3A;&#x672C;&#x8282;&#x7684;&#x91CD;&#x70B9;&#x4E0D;&#x5728; <code>tornado.web.Application</code> &#x8FD9;&#x4E2A;&#x5E94;&#x7528;&#x5BF9;&#x8C61;&#x4E0A; , &#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x8282;&#x4E2D;&#x4E0D;&#x4F1A;&#x8FC7;&#x591A;&#x7684;&#x53BB;&#x5206;&#x6790; <code>Application</code></p>
+<h2 id="configurable"><a name="configurable" class="anchor-navigation-ex-anchor" href="#configurable"><i class="fa fa-link" aria-hidden="true"></i></a>Configurable</h2>
+<p>&#x5728;&#x5F00;&#x59CB;&#x4E4B;&#x524D; , &#x6211;&#x4EEC;&#x9700;&#x8981;&#x5148;&#x770B;&#x4E00;&#x4E0B; <code>Configurable</code> &#x7684;&#x6E90;&#x7801; , &#x56E0;&#x4E3A;&#x5B83;&#x6539;&#x53D8;&#x4E86;&#x6211;&#x4EEC;&#x6B63;&#x5E38;&#x5BF9;&#x8C61;&#x521D;&#x59CB;&#x5316;&#x6D41;&#x7A0B; , &#x4E14;&#x5728; <code>Tornado</code> &#x4E2D;&#x57FA;&#x672C;&#x5927;&#x591A;&#x6570;&#x7C7B;&#x90FD;&#x7EE7;&#x627F;&#x4E86; <code>Configurable</code> </p>
+<pre><code class="lang-python"><span class="hljs-comment"># type: tornado.util.Configurable</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Configurable</span><span class="hljs-params">(object)</span>:</span>
+    __impl_class = <span class="hljs-keyword">None</span>  <span class="hljs-comment"># type: Optional[Type[Configurable]]</span>
+    __impl_kwargs = <span class="hljs-keyword">None</span>  <span class="hljs-comment"># type: Dict[str, Any]</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span><span class="hljs-params">(cls, *args: Any, **kwargs: Any)</span> -&gt; <span class="hljs-title">Any</span>:</span>
+        base = cls.configurable_base()
+        init_kwargs = {}  <span class="hljs-comment"># type: Dict[str, Any]</span>
+        <span class="hljs-keyword">if</span> cls <span class="hljs-keyword">is</span> base:
+            impl = cls.configured_class()
+            <span class="hljs-keyword">if</span> base.__impl_kwargs:
+                init_kwargs.update(base.__impl_kwargs)
+        <span class="hljs-keyword">else</span>:
+            impl = cls
+        init_kwargs.update(kwargs)
+        <span class="hljs-keyword">if</span> impl.configurable_base() <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> base:
+            <span class="hljs-comment"># The impl class is itself configurable, so recurse.</span>
+            <span class="hljs-keyword">return</span> impl(*args, **init_kwargs)
+        <span class="hljs-comment"># &#x8C03;&#x7528;object&#x7684;__new__&#x65B9;&#x6CD5;</span>
+        instance = super(Configurable, cls).__new__(impl)
+        <span class="hljs-comment"># &#x8C03;&#x7528;&#x5B9E;&#x4F8B;&#x7684; initialize &#x65B9;&#x6CD5;</span>
+        <span class="hljs-comment"># &#x5728;Tornado&#x4E2D;, &#x7EE7;&#x627F;&#x4E86; Configurable &#x7684;&#x7C7B;&#x7684; __init__ &#x57FA;&#x672C;&#x90FD;&#x662F; pass &#x5E26;&#x8FC7;</span>
+        <span class="hljs-comment"># &#x771F;&#x6B63;&#x7684;&#x521D;&#x59CB;&#x5316;&#x90FD;&#x653E;&#x5728; initialize &#x65B9;&#x6CD5;&#x4E2D;, &#x6240;&#x4EE5;&#x5982;&#x679C;&#x4F60;&#x53D1;&#x73B0;&#x4E86; initialize , &#x90A3;&#x4E48;&#x6CA1;&#x9519;, &#x5B83;&#x5C31;&#x662F;&#x771F;&#x6B63;&#x7684; `__init__`</span>
+        instance.initialize(*args, **init_kwargs)
+        <span class="hljs-keyword">return</span> instance
+</code></pre>
+<h2 id="listen"><a name="listen" class="anchor-navigation-ex-anchor" href="#listen"><i class="fa fa-link" aria-hidden="true"></i></a>listen</h2>
+<p><code>application.listen</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">listen</span><span class="hljs-params">(self, port: int, address: str = <span class="hljs-string">&quot;&quot;</span>, **kwargs: Any)</span> -&gt; <span class="hljs-title">HTTPServer</span>:</span>
+    <span class="hljs-comment"># type: tornado.httpserver.HTTPServer(TCPServer, Configurable, httputil.HTTPServerConnectionDelegate)</span>
+    <span class="hljs-comment"># type: tornado.tcpserver.TCPServer</span>
+    server = HTTPServer(self, **kwargs)
+    <span class="hljs-comment"># type: tornado.tcpserver.TCPServer.listen</span>
+    server.listen(port, address)
+    <span class="hljs-keyword">return</span> server
+</code></pre>
+<p><code>tornado.tcpserver.TCPServer.listen</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">listen</span><span class="hljs-params">(self, port: int, address: str = <span class="hljs-string">&quot;&quot;</span>)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-comment"># type: tornado.netutil.bind_sockets</span>
+    <span class="hljs-comment"># bind_sockets&#x662F;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x5957;&#x63A5;&#x5B57;&#x7684;, &#x9ED8;&#x8BA4;&#x4F1A;&#x6839;&#x636E;&#x7CFB;&#x7EDF;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x76F8;&#x5E94;&#x7684;&#x5957;&#x63A5;&#x5B57;</span>
+    <span class="hljs-comment"># &#x4EE5;Mac&#x4E3A;&#x4F8B;, &#x4F1A;&#x521B;&#x5EFA;&#x51FA; AF_INET &#x548C; AF_INET6 &#x4E24;&#x4E2A;&#x5957;&#x63A5;&#x5B57;</span>
+    <span class="hljs-string">&quot;&quot;&quot;
+    sockets : [
+    &lt;socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&apos;0.0.0.0&apos;, 8888)&gt;, 
+    &lt;socket.socket fd=6, family=AddressFamily.AF_INET6, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&apos;::&apos;, 8888, 0, 0)&gt;
+    ]
+    &quot;&quot;&quot;</span>
+    sockets = bind_sockets(port, address=address)
+    <span class="hljs-comment"># type: tornado.tcpserver.TCPServer.add_sockets</span>
+    self.add_sockets(sockets)
+</code></pre>
+<p><code>tornado.tcpserver.TCPServer.add_sockets</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_sockets</span><span class="hljs-params">(self, sockets: Iterable[socket.socket])</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-keyword">for</span> sock <span class="hljs-keyword">in</span> sockets:
+        <span class="hljs-comment"># self._sockets, self._handlers &#x662F;&#x4E24;&#x4E2A;dict</span>
+        <span class="hljs-comment"># sock.fileno()&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;, &#x7136;&#x540E;&#x4EE5;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x4E3A;key, socket&#x5BF9;&#x8C61;&#x4E3A;value&#x5B58;&#x50A8;&#x5230;server&#x5BF9;&#x8C61;&#x4E2D;</span>
+        <span class="hljs-comment"># sock type: socket.socket() </span>
+        self._sockets[sock.fileno()] = sock
+        <span class="hljs-comment"># type: tornado.netutil.add_accept_handler</span>
+        <span class="hljs-comment"># &#x5728;add_accept_handler&#x4E2D;&#x4F1A;&#x5B8C;&#x6210;IOLoop&#x7684;&#x521B;&#x5EFA;, &#x4EE5;&#x53CA;&#x5957;&#x63A5;&#x5B57;&#x7ED1;&#x5B9A;&#x5230;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x4E0A;</span>
+        self._handlers[sock.fileno()] = add_accept_handler(
+            sock, self._handle_connection
+        )
+        <span class="hljs-comment"># slef._handle_connection &#x770B;&#x540D;&#x5B57;&#x6211;&#x4EEC;&#x4E5F;&#x80FD;&#x77E5;&#x9053;&#x8FD9;&#x662F;&#x5904;&#x7406;&#x8FDE;&#x63A5;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;</span>
+</code></pre>
+<h2 id="addaccepthandler"><a name="addaccepthandler" class="anchor-navigation-ex-anchor" href="#addaccepthandler"><i class="fa fa-link" aria-hidden="true"></i></a>add_accept_handler</h2>
+<p><code>tornado.netutil.add_accept_handler</code> </p>
+<pre><code class="lang-python">def add_accept_handler(
+        sock: socket.socket, callback: Callable[[socket.socket, Any], None]
+) -&gt; Callable[[], None]:
+    # type: tornado.platform.asyncio.AsyncIOMainLoop(BaseAsyncIOLoop)
+    # type: tornado.platform.asyncio.BaseAsyncIOLoop(IOLoop)
+    # type: tornado.ioloop.IOLoop
+    # IOLoop.current(instance=True) =&gt; tornado.ioloop.IOLoop.current
+    &quot;&quot;&quot;
+    &#x5728;&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x7684;&#x5730;&#x65B9;&#x5C31;&#x662F;&#x5728; AsyncIOMainLoop(make_current=True)&#x7684;&#x65F6;&#x5019;
+    def initialize(self, **kwargs: Any) -&gt; None:  # type: ignore
+        &#x8FD9;&#x91CC;&#x4F1A;&#x4F7F;&#x7528;asyncio&#x53BB;&#x83B7;&#x53D6;&#x5230;&#x5F53;&#x524D;&#x7684;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;, &#x5E76;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;, &#x5230;&#x8FBE;BaseAsyncIOLoop.initialize
+        super().initialize(asyncio.get_event_loop(), **kwargs)
+    &quot;&quot;&quot;
+    io_loop = IOLoop.current() 
+    # &#x5176;&#x4ED6;&#x90E8;&#x5206;&#x6682;&#x65F6;&#x7701;&#x7565;, &#x6211;&#x4EEC;&#x5148;&#x770B;&#x770B;IOLoop&#x662F;&#x600E;&#x4E48;&#x521B;&#x5EFA;&#x7684;
+</code></pre>
+<p><code>tornado.platform.asyncio.AsyncIOMainLoop.initialize</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span><span class="hljs-params">(self, **kwargs: Any)</span> -&gt; <span class="hljs-title">None</span>:</span>  <span class="hljs-comment"># type: ignore</span>
+    <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x5F88;&#x5173;&#x952E;, &#x56E0;&#x4E3A;&#x5B83;&#x5176;&#x5B9E;&#x4F7F;&#x7528;&#x4E86;asyncio&#x53BB;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x7684;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;, &#x7136;&#x540E;&#x5C06;&#x62FF;&#x5230;&#x7684;eventloop&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x4E86;BaseAsyncIOLoop.initialize</span>
+    super().initialize(asyncio.get_event_loop(), **kwargs)
+</code></pre>
+<p><code>tornado.platform.asyncio.BaseAsyncIOLoop.initialize</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span><span class="hljs-params">(self, asyncio_loop: asyncio.AbstractEventLoop, **kwargs: Any)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5B98;&#x65B9;&#x7684;&#x6807;&#x6CE8;&#x662F;asyncio.AbstractEventLoop, &#x5B9E;&#x9645;&#x4E0A;asyncio&#x8FD9;&#x91CC;&#x7684;&#x5B9E;&#x73B0;&#x8981;&#x590D;&#x6742;&#x5F97;&#x591A;, &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x653E;&#x5728;&#x540E;&#x9762;&#x7684;&#x6587;&#x7AE0;&#x4E2D;</span>
+    <span class="hljs-comment"># &#x5982;&#x679C;&#x4F60;&#x770B;&#x8FC7;asyncio&#x7684;&#x6E90;&#x7801;, &#x90A3;&#x5728;&#x8FD9;&#x91CC;&#x5343;&#x4E07;&#x522B;&#x641E;&#x6DF7;&#x4E86;, &#x56E0;&#x4E3A;tornado.ioloop.IOLoop&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x8BB2;asyncio&#x4E2D;&#x7684;loop&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x8BF4;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#x6765;&#x4F7F;&#x7528;&#x7684;, &#x5E76;&#x4E0D;&#x662F;&#x7EE7;&#x627F;&#x7684;&#x65B9;&#x5F0F;, &#x6240;&#x4EE5;&#x4E24;&#x8005;&#x5B58;&#x5728;&#x4E00;&#x4E9B;&#x5DEE;&#x5F02;</span>
+    self.asyncio_loop = asyncio_loop
+    self.selector_loop = asyncio_loop
+    <span class="hljs-keyword">if</span> hasattr(asyncio, <span class="hljs-string">&quot;ProactorEventLoop&quot;</span>) <span class="hljs-keyword">and</span> isinstance(
+        asyncio_loop, asyncio.ProactorEventLoop  <span class="hljs-comment"># type: ignore</span>
+    ):
+        self.selector_loop = AddThreadSelectorEventLoop(asyncio_loop)
+    self.handlers = {}
+    self.readers = set()  <span class="hljs-comment"># type: Set[int]</span>
+    self.writers = set()  <span class="hljs-comment"># type: Set[int]</span>
+    self.closing = <span class="hljs-keyword">False</span>
+    <span class="hljs-keyword">for</span> loop <span class="hljs-keyword">in</span> list(IOLoop._ioloop_for_asyncio):
+        <span class="hljs-keyword">if</span> loop.is_closed():
+            <span class="hljs-keyword">del</span> IOLoop._ioloop_for_asyncio[loop]
+    <span class="hljs-comment"># &#x5728;&#x8FD9;&#x91CC;&#x5C31;&#x4F1A;&#x8BB2;asyncio_loop&#x5B58;&#x653E;&#x5230;IOLoop&#x7684;&#x7C7B;&#x53D8;&#x91CF;&#x4E2D;</span>
+    <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x8981;&#x6CE8;&#x610F;&#x7684;, &#x5728;&#x5176;&#x4ED6;&#x7684;&#x5730;&#x65B9;&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x7528;asyncio&#x7684;get_event_loop&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;asyncio_loop</span>
+    <span class="hljs-comment"># &#x8FD9;&#x6837;&#x518D;&#x901A;&#x8FC7;asyncio_loop&#x5C31;&#x53EF;&#x4EE5;&#x5230;&#x7C7B;&#x53D8;&#x91CF;&#x4E2D;&#x62FF;&#x5230;tornado.platform.asyncio.AsyncIOMainLoop</span>
+    <span class="hljs-comment"># &#x4F60;&#x53EF;&#x4EE5;&#x5728;IOLoop&#x7684;current&#x4E2D;&#x770B;&#x5230;&#x8FD9;&#x5757;&#x4EE3;&#x7801;</span>
+    IOLoop._ioloop_for_asyncio[asyncio_loop] = self
+    self._thread_identity = <span class="hljs-number">0</span>
+    super().initialize(**kwargs)
+    <span class="hljs-comment"># assign_thread_identity&#x5C06;&#x4F1A;&#x5728;IOLoop.start()&#x7684;&#x65F6;&#x5019;&#x88AB;&#x56DE;&#x8C03;</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">assign_thread_identity</span><span class="hljs-params">()</span> -&gt; <span class="hljs-title">None</span>:</span>
+        self._thread_identity = threading.get_ident()
+    <span class="hljs-comment"># type: tornado.platform.asyncio.BaseAsyncIOLoop.add_callback</span>
+    <span class="hljs-comment"># &#x8FD9;&#x4E2A;add_callback&#x5176;&#x5B9E;&#x4F7F;&#x7528;&#x7684;&#x5C31;&#x662F;asyncio&#x4E2D;loop&#x7684;add_callback, &#x5B83;&#x7684;&#x505A;&#x7528;&#x54EA;&#x4E2A;&#x5C31;&#x662F;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x5230;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x4E2D;</span>
+    self.add_callback(assign_thread_identity)
+</code></pre>
+<p>&#x8FD9;&#x79CD;&#x6211;&#x4EEC;&#x5C31;&#x5927;&#x8D39;&#x5468;&#x7AE0;&#x7684;&#x62FF;&#x5230;&#x4E86; <code>io_loop</code> , &#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x518D;&#x56DE;&#x5230; <code>tornado.netutil.add_accept_handler</code> </p>
+<pre><code class="lang-python">def add_accept_handler(
+        sock: socket.socket, callback: Callable[[socket.socket, Any], None]
+) -&gt; Callable[[], None]:
+    # type: tornado.platform.asyncio.AsyncIOMainLoop(BaseAsyncIOLoop)
+    # type: tornado.platform.asyncio.BaseAsyncIOLoop(IOLoop)
+    # type: tornado.ioloop.IOLoop
+    # IOLoop.current(instance=True) =&gt; tornado.ioloop.IOLoop.current
+    io_loop = IOLoop.current() 
+    removed = [False]
+    # &#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5148;&#x7701;&#x7565;accept_handler, &#x7B49;&#x5230;&#x771F;&#x6B63;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;&#x518D;&#x5206;&#x6790;
+    def accept_handler(fd: socket.socket, events: int) -&gt; None:
+        pass
+
+    def remove_handler() -&gt; None:
+        io_loop.remove_handler(sock)
+        removed[0] = True
+    # type: tornado.platform.asyncio.BaseAsyncIOLoop.add_handler
+    # &#x5728;&#x8FD9;&#x91CC;&#x6CE8;&#x518C;&#x4E86;&#x4E00;&#x4E2A;&#x8BFB;&#x4E8B;&#x4EF6;
+    io_loop.add_handler(sock, accept_handler, IOLoop.READ)
+    return remove_handler
+</code></pre>
+<h2 id="addhandler"><a name="addhandler" class="anchor-navigation-ex-anchor" href="#addhandler"><i class="fa fa-link" aria-hidden="true"></i></a>add_handler</h2>
+<p><code>tornado.platform.asyncio.BaseAasyncIOLoop.add_handler</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_handler</span><span class="hljs-params">(
+    self, fd: Union[int, _Selectable], handler: Callable[..., None], events: int
+)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    fd, fileobj = self.split_fd(fd)
+    <span class="hljs-keyword">if</span> fd <span class="hljs-keyword">in</span> self.handlers:
+        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;fd %s added twice&quot;</span> % fd)
+    <span class="hljs-comment"># &#x8FD9;&#x91CC;self.handlers&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x662F;&#x4EE5;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x4E3A;key, &#x5957;&#x63A5;&#x5B57;&#x5BF9;&#x8C61;&#x548C; accept_handler &#x7EC4;&#x6210;&#x7684;&#x5143;&#x7956;&#x4E3A;value&#x7684;dict</span>
+    self.handlers[fd] = (fileobj, handler)
+    <span class="hljs-keyword">if</span> events &amp; IOLoop.READ:
+        <span class="hljs-comment"># type: asyncio.selector_evnets.add_reader</span>
+        <span class="hljs-comment"># &#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x8BFB;&#x4E8B;&#x4EF6;&#x7684;&#x56DE;&#x8C03;</span>
+        self.selector_loop.add_reader(fd, self._handle_events, fd, IOLoop.READ)
+        self.readers.add(fd)
+    <span class="hljs-keyword">if</span> events &amp; IOLoop.WRITE:
+        self.selector_loop.add_writer(fd, self._handle_events, fd, IOLoop.WRITE)
+        self.writers.add(fd)
+</code></pre>
+<p><code>asyncio.selector_events.add_reader</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_reader</span><span class="hljs-params">(self, fd, callback, *args)</span>:</span>
+    self._ensure_fd_no_transport(fd)
+    <span class="hljs-comment"># callback: tornado.platform.asyncio.BaseAsyncIOLoop._handle_events</span>
+    <span class="hljs-comment"># type: asyncio.selector_events.BaseSelectorEventLoop._add_reader</span>
+    <span class="hljs-keyword">return</span> self._add_reader(fd, callback, *args)
+</code></pre>
+<p><code>asyncio.selector_events.BaseSelectorEventLoop._add_reader</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_add_reader</span><span class="hljs-params">(self, fd, callback, *args)</span>:</span>
+    self._check_closed()
+    handle = events.Handle(callback, args, self)
+    <span class="hljs-keyword">try</span>:
+        key = self._selector.get_key(fd)
+        <span class="hljs-keyword">except</span> KeyError:
+            <span class="hljs-comment"># self._selector&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x8DEF;&#x590D;&#x7528;&#x5668;, &#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x4E3B;&#x8981;&#x662F;&#x5728;Linux&#x4E0A;&#x8FD0;&#x884C;</span>
+            <span class="hljs-comment"># &#x6240;&#x4EE5; type: selectors.EpollSelector</span>
+            <span class="hljs-comment"># &#x5728;Mac&#x4E0A;&#x4F7F;&#x7528;&#x7684;&#x662F; selectors.KqueueSelector</span>
+            <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x4F1A;&#x5C06;&#x4E00;&#x4E2A;&#x8BFB;&#x4E8B;&#x4EF6;&#x6CE8;&#x518C;&#x5230;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x5668;&#x4E2D;</span>
+            self._selector.register(fd, selectors.EVENT_READ,
+                                    (handle, <span class="hljs-keyword">None</span>))
+        <span class="hljs-keyword">else</span>:
+            mask, (reader, writer) = key.events, key.data
+            self._selector.modify(fd, mask | selectors.EVENT_READ,
+                                      (handle, writer))
+            <span class="hljs-keyword">if</span> reader <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+                reader.cancel()
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A; , &#x5230;&#x8FD9;&#x91CC; , &#x6211;&#x4EEC;&#x7684;&#x521D;&#x59CB;&#x5316;&#x6D41;&#x7A0B;&#x5C31;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;</p>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x8C03;&#x7528; <code>tornado.ioloop.IOLoop.current().start()</code> </p>
+<p>&#x5982;&#x679C;&#x5149;&#x770B;&#x793A;&#x4F8B; , &#x4F60;&#x53EF;&#x4EE5;&#x4F1A;&#x7591;&#x60D1; , &#x6211;&#x4EC0;&#x4E48;&#x73B0;&#x5728;&#x53C8;&#x8C03;&#x7528; <code>IOLoop.current()</code> , &#x4E14;&#x6CA1;&#x6709;&#x660E;&#x663E;&#x7684;&#x5C06;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C; <code>Tornado</code> &#x7684;&#x5E94;&#x7528;&#x7ED1;&#x5B9A;&#x8D77;&#x6765; , &#x6240;&#x4EE5;&#x5230;&#x8FD9;&#x91CC;&#x4F60;&#x5E94;&#x8BE5;&#x5C31;&#x6CA1;&#x6709;&#x7591;&#x60D1;&#x4E86; , &#x56E0;&#x4E3A;&#x5728; <code>listen</code> &#x4E2D; , &#x505A;&#x4E86;&#x592A;&#x591A;&#x7684;&#x4E8B;&#x60C5;&#x4E86;</p>
+<pre><code class="lang-python">tornado.ioloop.current().start()
+<span class="hljs-comment"># type: tornado.platform.asyncio.BaseAsyncIOLoop.start</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">start</span><span class="hljs-params">(self)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        old_loop = asyncio.get_event_loop()
+    <span class="hljs-keyword">except</span> (RuntimeError, AssertionError):
+        old_loop = <span class="hljs-keyword">None</span>  <span class="hljs-comment"># type: ignore</span>
+    <span class="hljs-keyword">try</span>:
+        self._setup_logging()
+        <span class="hljs-comment"># type: asyncio.base_events.BaseEventLoop.run_forever</span>
+        asyncio.set_event_loop(self.asyncio_loop)
+        self.asyncio_loop.run_forever()
+    <span class="hljs-keyword">finally</span>:
+        asyncio.set_event_loop(old_loop)
+</code></pre>
+<p><code>asyncio.base_events.BaseEventLoop.run_forever</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run_forever</span><span class="hljs-params">(self)</span>:</span>
+    <span class="hljs-string">&quot;&quot;&quot;Run until stop() is called.&quot;&quot;&quot;</span>
+    self._check_closed()
+    <span class="hljs-keyword">if</span> self.is_running():
+        <span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">&apos;This event loop is already running&apos;</span>)
+    <span class="hljs-keyword">if</span> events._get_running_loop() <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        <span class="hljs-keyword">raise</span> RuntimeError(
+            <span class="hljs-string">&apos;Cannot run the event loop while another loop is running&apos;</span>)
+    self._set_coroutine_wrapper(self._debug)
+    self._thread_id = threading.get_ident()
+    <span class="hljs-keyword">if</span> self._asyncgens <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        old_agen_hooks = sys.get_asyncgen_hooks()
+        sys.set_asyncgen_hooks(firstiter=self._asyncgen_firstiter_hook,
+                               finalizer=self._asyncgen_finalizer_hook)
+    <span class="hljs-keyword">try</span>:
+        events._set_running_loop(self)
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+            <span class="hljs-comment"># &#x4ECE;&#x8FD9;&#x91CC;&#x6574;&#x4E2A;&#x7EBF;&#x7A0B;&#x5C31;&#x8FDB;&#x5165;&#x4E86;&#x6B7B;&#x5FAA;&#x73AF;&#x5F53;&#x4E2D;</span>
+            <span class="hljs-comment"># type: asyncio.base_events.BaseEventLoop._run_once</span>
+            <span class="hljs-comment"># &#x6BCF;&#x5F53;&#x6709;&#x65B0;&#x7684;&#x4E8B;&#x4EF6;&#x4EA7;&#x751F;&#x65F6;, _run_once&#x5C31;&#x4F1A;&#x88AB;&#x5FAA;&#x73AF;&#x4E00;&#x6B21;</span>
+            self._run_once()
+            <span class="hljs-keyword">if</span> self._stopping:
+                <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">finally</span>:
+        self._stopping = <span class="hljs-keyword">False</span>
+        self._thread_id = <span class="hljs-keyword">None</span>
+        events._set_running_loop(<span class="hljs-keyword">None</span>)
+        self._set_coroutine_wrapper(<span class="hljs-keyword">False</span>)
+        <span class="hljs-keyword">if</span> self._asyncgens <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            sys.set_asyncgen_hooks(*old_agen_hooks)
+</code></pre>
+<h2 id="handleevents"><a name="handleevents" class="anchor-navigation-ex-anchor" href="#handleevents"><i class="fa fa-link" aria-hidden="true"></i></a>_handle_events</h2>
+<p>&#x5728;&#x6211;&#x4EEC;&#x5206;&#x6790; <code>_run_once</code> &#x4E4B;&#x524D; , &#x6211;&#x4EEC;&#x9700;&#x8981;&#x5148;&#x770B;&#x4E00;&#x4E0B; <code>_handle_events</code> , &#x56E0;&#x4E3A;&#x5B83;&#x8FD9;&#x624D;&#x662F;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570; </p>
+<p><code>tornado.platform.asyncio.BaseAsyncIOLoop._handle_events</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_handle_events</span><span class="hljs-params">(self, fd: int, events: int)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-comment"># &#x5176;&#x5B9E;&#x8FD9;&#x91CC;&#x7684;&#x64CD;&#x4F5C;&#x5F88;&#x7B80;&#x5355;, &#x5C31;&#x662F;&#x6839;&#x636E;&#x76D1;&#x542C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;, &#x5230;handlers&#x4E2D;&#x83B7;&#x53D6;socket&#x548C;handler_func</span>
+    <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x7684;handler_func&#x5C31;&#x662F;accept_handler, &#x4E5F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x8C03;&#x7528;add_accept_handler&#x7684;&#x65F6;&#x5019;&#x91CC;&#x9762;&#x8C03;&#x7528;&#x7684;io_loop.add_handler(sock, accept_handler, IOLoop.READ) &#x8FD9;&#x91CC;&#x653E;&#x8FDB;&#x53BB;&#x7684;</span>
+    <span class="hljs-comment"># &#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5230;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x53BB;&#x770B;accept_handler&#x4E86;</span>
+    fileobj, handler_func = self.handlers[fd]
+    handler_func(fileobj, events)
+</code></pre>
+<p><code>accept_handler</code></p>
+<pre><code class="lang-python"><span class="hljs-comment"># type: tornado.tcpserver.TCPServer._handle_connection</span>
+callback = self._handle_connection
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">accept_handler</span><span class="hljs-params">(fd: socket.socket, events: int)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(_DEFAULT_BACKLOG):
+        <span class="hljs-keyword">if</span> removed[<span class="hljs-number">0</span>]:
+            <span class="hljs-comment"># The socket was probably closed</span>
+            <span class="hljs-keyword">return</span>
+        <span class="hljs-keyword">try</span>:
+            <span class="hljs-comment"># &#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5F53;&#x6709;&#x8FDE;&#x63A5;&#x8FC7;&#x6765;&#x65F6;, &#x5C31;&#x62FF;&#x5230;conn&#x548C;address, &#x7136;&#x540E;&#x8FDB;&#x884C;&#x56DE;&#x8C03;</span>
+            <span class="hljs-comment"># &#x56DE;&#x8C03;&#x5C31;&#x662F;&#x5728;add_sockets&#x7684;&#x65F6;&#x5019;&#x8BBE;&#x7F6E;&#x7684; self._handle_connection</span>
+            connection, address = sock.accept()
+        <span class="hljs-keyword">except</span> BlockingIOError:
+            <span class="hljs-comment"># EWOULDBLOCK indicates we have accepted every</span>
+            <span class="hljs-comment"># connection that is available.</span>
+            <span class="hljs-keyword">return</span>
+        <span class="hljs-keyword">except</span> ConnectionAbortedError:
+            <span class="hljs-comment"># ECONNABORTED indicates that there was a connection</span>
+            <span class="hljs-comment"># but it was closed while still in the accept queue.</span>
+            <span class="hljs-comment"># (observed on FreeBSD).</span>
+            <span class="hljs-keyword">continue</span>
+        callback(connection, address)
+</code></pre>
+<h2 id="handleconnection"><a name="handleconnection" class="anchor-navigation-ex-anchor" href="#handleconnection"><i class="fa fa-link" aria-hidden="true"></i></a>_handle_connection</h2>
+<p><code>tornado.tcpserver.TCPServer._handle_connection</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_handle_connection</span><span class="hljs-params">(self, connection: socket.socket, address: Any)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-comment"># &#x6211;&#x4EEC;&#x628A;ssl&#x90E8;&#x5206;&#x76F4;&#x63A5;&#x7565;&#x8FC7;</span>
+    <span class="hljs-keyword">if</span> self.ssl_options <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">if</span> self.ssl_options <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            stream = SSLIOStream(
+                connection,
+                max_buffer_size=self.max_buffer_size,
+                read_chunk_size=self.read_chunk_size,
+            )  <span class="hljs-comment"># type: IOStream</span>
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-comment"># type: tornado.iostream.IOStream</span>
+            stream = IOStream(
+                connection,
+                max_buffer_size=self.max_buffer_size,
+                read_chunk_size=self.read_chunk_size,
+            )
+        <span class="hljs-comment"># type: tornado.httpserver.HTTPServer.handle_stream</span>
+        future = self.handle_stream(stream, address)
+        <span class="hljs-keyword">if</span> future <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            IOLoop.current().add_future(
+                gen.convert_yielded(future), <span class="hljs-keyword">lambda</span> f: f.result()
+            )
+    <span class="hljs-keyword">except</span> Exception:
+        app_log.error(<span class="hljs-string">&quot;Error in connection callback&quot;</span>, exc_info=<span class="hljs-keyword">True</span>)
+</code></pre>
+<p><code>tornado.httpserver.HTTPServer.handle_stream</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle_stream</span><span class="hljs-params">(self, stream: iostream.IOStream, address: Tuple)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    context = _HTTPRequestContext(
+        stream, address, self.protocol, self.trusted_downstream
+    )
+    <span class="hljs-comment"># &#x521B;&#x5EFA;&#x8FDE;&#x63A5;&#x5BF9;&#x8C61;</span>
+    conn = HTTP1ServerConnection(stream, self.conn_params, context)
+    self._connections.add(conn)
+    <span class="hljs-comment"># type: tornado.http1connection.HTTP1ServerConnection.start_serving</span>
+    <span class="hljs-comment"># self: tornado.httpserver.HTTPSever &#x7EE7;&#x627F;&#x4E86; tornado.httputil.HTTPServerConnectionDelegate</span>
+    conn.start_serving(self)
+</code></pre>
+<p><code>tornado.http1connection.HTTP1ServerConnection.start_serving</code></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">start_serving</span><span class="hljs-params">(self, delegate: httputil.HTTPServerConnectionDelegate)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-keyword">assert</span> isinstance(delegate, httputil.HTTPServerConnectionDelegate)
+    <span class="hljs-comment"># &#x6784;&#x9020;future</span>
+    <span class="hljs-comment"># delegate &lt;=&gt; HTTPServer</span>
+    <span class="hljs-comment"># type: tornado.http1connection.HTTP1ServerConnection._server_request_loop</span>
+    <span class="hljs-comment"># &#x5C06; coroutine &#x5305;&#x88C5;&#x6210; Task</span>
+    <span class="hljs-comment"># &#x5B9E;&#x9645;&#x4E0A;&#x5230;&#x8FD9;&#x91CC;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x7684;&#x6D41;&#x7A0B;&#x5C31;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;, &#x5728;self._server_request_loop&#x4E2D;&#x4E3B;&#x8981;&#x662F;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x7684;&#x7EC6;&#x8282;, &#x6211;&#x4EEC;&#x653E;&#x5230;&#x540E;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x4E2D;&#x518D;&#x5206;&#x6790;</span>
+    <span class="hljs-comment"># &#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;, &#x8FD9;&#x4E9B;Future&#x90FD;&#x8FD8;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x6267;&#x884C;</span>
+    fut = gen.convert_yielded(self._server_request_loop(delegate))
+    self._serving_future = fut
+    <span class="hljs-comment"># self.stream.io_loop type: tornado.ioloop.IOLoop.add_future</span>
+    <span class="hljs-comment"># &#x5728;add_future&#x4F1A;&#x8C03;&#x7528;Future.add_done_callback type: asyncio.futures.Future</span>
+    <span class="hljs-comment"># add_done_callback&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;&#x5F53;&#x524D;Future&#x7684;&#x72B6;&#x6001;&#x6765;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6267;&#x884C;, &#x800C;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x8FD8;&#x662F;&#x4F7F;&#x7528;&#x7684;asyncio.base_events.BaseEventLoop.call_soon</span>
+    <span class="hljs-comment"># &#x6700;&#x540E;&#x5462;, call_soon&#x518D;&#x8C03;&#x7528;_call_soon, &#x5C06;&#x56DE;&#x8C03;&#x5305;&#x88C5;&#x6210;events.Handle, &#x6700;&#x540E;append&#x5230;_ready&#x961F;&#x5217;&#x4E2D;</span>
+    self.stream.io_loop.add_future(fut, <span class="hljs-keyword">lambda</span> f: f.result())
+</code></pre>
+<p><code>tornado.http1connection.HTTP1ServerConnection._server_request</code> </p>
+<pre><code class="lang-python"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_server_request_loop</span><span class="hljs-params">(
+    self, delegate: httputil.HTTPServerConnectionDelegate
+)</span> -&gt; <span class="hljs-title">None</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+            conn = HTTP1Connection(self.stream, <span class="hljs-keyword">False</span>, self.params, self.context)
+            <span class="hljs-comment"># delegate.start_request type: tornado.httpserver.HTTPServer.start_request</span>
+            request_delegate = delegate.start_request(self, conn)
+            <span class="hljs-keyword">try</span>:
+                ret = <span class="hljs-keyword">await</span> conn.read_response(request_delegate)
+            <span class="hljs-keyword">except</span> (
+                iostream.StreamClosedError,
+                iostream.UnsatisfiableReadError,
+                asyncio.CancelledError,
+            ):
+                <span class="hljs-keyword">return</span>
+            <span class="hljs-keyword">except</span> _QuietException:
+                <span class="hljs-comment"># This exception was already logged.</span>
+                conn.close()
+                <span class="hljs-keyword">return</span>
+            <span class="hljs-keyword">except</span> Exception:
+                gen_log.error(<span class="hljs-string">&quot;Uncaught exception&quot;</span>, exc_info=<span class="hljs-keyword">True</span>)
+                conn.close()
+                <span class="hljs-keyword">return</span>
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret:
+                <span class="hljs-keyword">return</span>
+            <span class="hljs-comment"># &#x53EA;&#x8981;&#x6CA1;&#x6709;&#x5B8C;&#x6210;, &#x90A3;&#x4E48;&#x6BCF;&#x6B21;&#x90FD;&#x4F1A;&#x5207;&#x6362;</span>
+            <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">finally</span>:
+        delegate.on_close(self)
+</code></pre>
+<p>&#x6240;&#x4EE5;&#x5230;&#x8FD9;&#x91CC; , &#x57FA;&#x672C;&#x4E0A;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x77E5;&#x9053; , &#x6240;&#x6709;&#x7684;&#x8BF7;&#x6C42;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x8FBE;&#x5230; <code>_ready</code> &#x4E2D; , &#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x770B;&#x6700;&#x6838;&#x5FC3;&#x7684; <code>_run_once</code> &#x5230;&#x5E95;&#x505A;&#x4E86;&#x4EC0;&#x4E48;&#x4E86;</p>
+<h2 id="runonce"><a name="runonce" class="anchor-navigation-ex-anchor" href="#runonce"><i class="fa fa-link" aria-hidden="true"></i></a>_run_once</h2>
+<p><code>asyncio.base_events.BaseEventLoop._run_once</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_run_once</span><span class="hljs-params">(self)</span>:</span>
+    sched_count = len(self._scheduled)
+    <span class="hljs-comment"># self._scheduled &#x662F;&#x5173;&#x4E8E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7684;&#x4E00;&#x4E9B;&#x5B9E;&#x73B0;</span>
+    <span class="hljs-comment"># &#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x57FA;&#x672C;&#x4E0A;&#x662F;&#x901A;&#x8FC7; asyncio.base_events.BaseEventLoop.call_at &#x53BB;&#x505A;&#x7684;</span>
+    <span class="hljs-comment"># &#x800C;&#x5728;call_at&#x4E2D;, &#x4F1A;&#x6709;&#x4E00;&#x4E2A;timer&#x5B9A;&#x65F6;&#x5668;&#x6765;&#x63A7;&#x5236;</span>
+    <span class="hljs-keyword">if</span> (sched_count &gt; _MIN_SCHEDULED_TIMER_HANDLES <span class="hljs-keyword">and</span>
+        self._timer_cancelled_count / sched_count &gt;
+            _MIN_CANCELLED_TIMER_HANDLES_FRACTION):
+        <span class="hljs-comment"># Remove delayed calls that were cancelled if their number</span>
+        <span class="hljs-comment"># is too high</span>
+        new_scheduled = []
+        <span class="hljs-keyword">for</span> handle <span class="hljs-keyword">in</span> self._scheduled:
+            <span class="hljs-keyword">if</span> handle._cancelled:
+                handle._scheduled = <span class="hljs-keyword">False</span>
+            <span class="hljs-keyword">else</span>:
+                new_scheduled.append(handle)
+
+        heapq.heapify(new_scheduled)
+        self._scheduled = new_scheduled
+        self._timer_cancelled_count = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-comment"># Remove delayed calls that were cancelled from head of queue.</span>
+        <span class="hljs-keyword">while</span> self._scheduled <span class="hljs-keyword">and</span> self._scheduled[<span class="hljs-number">0</span>]._cancelled:
+            self._timer_cancelled_count -= <span class="hljs-number">1</span>
+            handle = heapq.heappop(self._scheduled)
+            handle._scheduled = <span class="hljs-keyword">False</span>
+
+    timeout = <span class="hljs-keyword">None</span>
+    <span class="hljs-comment"># &#x521A;&#x542F;&#x52A8;&#x8FDB;&#x6765;self._ready&#x5176;&#x5B9E;&#x662F;&#x6709;&#x4E1C;&#x897F;&#x7684;, &#x5C31;&#x662F;&#x5728;listen&#x7684;&#x65F6;&#x5019;&#x6CE8;&#x518C;&#x7684; assign_thread_identity &#x51FD;&#x6570;</span>
+    <span class="hljs-comment"># &#x5F53;&#x51C6;&#x5907;&#x597D;&#x7684;&#x4EFB;&#x52A1;&#x4E2D;&#x6709;&#x4EFB;&#x52A1;&#x65F6;, &#x5C31;&#x76F4;&#x63A5;&#x6267;&#x884C;</span>
+    <span class="hljs-keyword">if</span> self._ready <span class="hljs-keyword">or</span> self._stopping:
+        timeout = <span class="hljs-number">0</span>
+    <span class="hljs-comment"># &#x5982;&#x679C;&#x73B0;&#x5728;&#x90FD;&#x6CA1;&#x6709;, </span>
+    <span class="hljs-keyword">elif</span> self._scheduled:
+        <span class="hljs-comment"># Compute the desired timeout.</span>
+        when = self._scheduled[<span class="hljs-number">0</span>]._when
+        timeout = min(max(<span class="hljs-number">0</span>, when - self.time()), MAXIMUM_SELECT_TIMEOUT)
+
+    <span class="hljs-keyword">if</span> self._debug <span class="hljs-keyword">and</span> timeout != <span class="hljs-number">0</span>:
+        t0 = self.time()
+        event_list = self._selector.select(timeout)
+        dt = self.time() - t0
+        <span class="hljs-keyword">if</span> dt &gt;= <span class="hljs-number">1.0</span>:
+            level = logging.INFO
+        <span class="hljs-keyword">else</span>:
+            level = logging.DEBUG
+        nevent = len(event_list)
+        <span class="hljs-keyword">if</span> timeout <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
+            logger.log(level, <span class="hljs-string">&apos;poll took %.3f ms: %s events&apos;</span>,
+                       dt * <span class="hljs-number">1e3</span>, nevent)
+        <span class="hljs-keyword">elif</span> nevent:
+            logger.log(level,
+                       <span class="hljs-string">&apos;poll %.3f ms took %.3f ms: %s events&apos;</span>,
+                       timeout * <span class="hljs-number">1e3</span>, dt * <span class="hljs-number">1e3</span>, nevent)
+        <span class="hljs-keyword">elif</span> dt &gt;= <span class="hljs-number">1.0</span>:
+            logger.log(level,
+                       <span class="hljs-string">&apos;poll %.3f ms took %.3f ms: timeout&apos;</span>,
+                       timeout * <span class="hljs-number">1e3</span>, dt * <span class="hljs-number">1e3</span>)
+    <span class="hljs-keyword">else</span>:
+        event_list = self._selector.select(timeout)
+    <span class="hljs-comment"># &#x8FD9;&#x4E2A;&#x65F6;&#x5019;event_list&#x53EA;&#x6709;[(SelectorKey(fileobj=8, fd=8, events=1, data=(&lt;Handle BaseSelectorEventLoop._read_from_self()&gt;, None)), 1)]</span>
+    <span class="hljs-comment"># &#x5B83;&#x662F;&#x5728;BaseSelectorEventLoop&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#x8C03;&#x7528;&#x7684; _make_self_pipe&#x65B9;&#x6CD5;&#x653E;&#x8FDB;&#x53BB;&#x7684;</span>
+    <span class="hljs-comment"># &#x800C;_read_from_self&#x4F1A;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#x5957;&#x63A5;&#x5B57;&#x4F20;&#x8F93;&#x6570;&#x636E;, &#x5E76;&#x8BFB;&#x53D6;&#x6570;&#x636E;</span>
+    <span class="hljs-comment"># &#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x60F3;, &#x6211;&#x4EEC;&#x5728;listen&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x6CE8;&#x518C;&#x4E86;&#x4E24;&#x4E2A;&#x5957;&#x63A5;&#x5B57;, &#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E2A;event_list&#x6CA1;&#x6709;&#x5B83;&#x4EEC;</span>
+    <span class="hljs-comment"># &#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x73B0;&#x5728;&#x8FD8;&#x6CA1;&#x6709;&#x8FDE;&#x63A5;&#x8FDB;&#x6765;, &#x6240;&#x4EE5;&#x4E24;&#x4E2A;&#x4E8B;&#x4EF6;&#x90FD;&#x8FD8;&#x6CA1;&#x6709;&#x51C6;&#x5907;&#x597D;</span>
+    <span class="hljs-comment"># type: asyncio.selector_events.BaseSelectorEventLoop._process_events</span>
+    self._process_events(event_list)
+    <span class="hljs-comment"># &#x6211;&#x4EEC;&#x5148;&#x7701;&#x7565;&#x4E0B;&#x9762;&#x7684;&#x90E8;&#x5206;, &#x770B;&#x770B;_process_events&#x505A;&#x4E86;&#x4EC0;&#x4E48;&#x4E8B;&#x60C5;</span>
+</code></pre>
+<p><code>asyncio.selector_events.BaseSelectorEventLoop._process_events</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_process_events</span><span class="hljs-params">(self, event_list)</span>:</span>
+    <span class="hljs-keyword">for</span> key, mask <span class="hljs-keyword">in</span> event_list:
+        fileobj, (reader, writer) = key.fileobj, key.data
+        <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x7684; key.data &#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x9762;_add_reader&#x65B9;&#x6CD5;&#x4E2D;&#x6240;&#x6CE8;&#x518C;&#x7684;</span>
+        <span class="hljs-comment"># &#x8BFB;&#x4E8B;&#x4EF6; self._selector.register(fd, selectors.EVENT_READ, (handle, None))</span>
+        <span class="hljs-comment"># &#x5199;&#x4E8B;&#x4EF6; self._selector.modify(fd, mask | selectors.EVENT_READ, (handle, writer))</span>
+        <span class="hljs-comment"># &#x5176;&#x4E2D; handle &#x662F; events.Handle type: asyncio.events.Handle</span>
+        <span class="hljs-keyword">if</span> mask &amp; selectors.EVENT_READ <span class="hljs-keyword">and</span> reader <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            <span class="hljs-keyword">if</span> reader._cancelled:
+                self._remove_reader(fileobj)
+            <span class="hljs-keyword">else</span>:
+                <span class="hljs-comment"># &#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5E76;&#x4E0D;&#x4F1A;&#x771F;&#x6B63;&#x7684;&#x6267;&#x884C;&#x800C;&#x662F;&#x5C06;&#x8FD9;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;&#x6570;, &#x653E;&#x5165; _reday &#x4E2D;</span>
+                <span class="hljs-comment"># type: asyncio.base_events.BaseEventLoop._add_callback</span>
+                self._add_callback(reader)
+        <span class="hljs-keyword">if</span> mask &amp; selectors.EVENT_WRITE <span class="hljs-keyword">and</span> writer <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            <span class="hljs-keyword">if</span> writer._cancelled:
+                self._remove_writer(fileobj)
+            <span class="hljs-keyword">else</span>:
+                self._add_callback(writer)
+</code></pre>
+<p><code>asyncio.base_events.BaseEventLoop._add_callback</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_add_callback</span><span class="hljs-params">(self, handle)</span>:</span>
+    <span class="hljs-string">&quot;&quot;&quot;Add a Handle to _scheduled (TimerHandle) or _ready.&quot;&quot;&quot;</span>
+    <span class="hljs-keyword">assert</span> isinstance(handle, events.Handle), <span class="hljs-string">&apos;A Handle is required here&apos;</span>
+    <span class="hljs-keyword">if</span> handle._cancelled:
+        <span class="hljs-keyword">return</span>
+    <span class="hljs-keyword">assert</span> <span class="hljs-keyword">not</span> isinstance(handle, events.TimerHandle)
+    <span class="hljs-comment"># &#x4E5F;&#x5C31;&#x662F;&#x6211;&#x6240;&#x8BF4;&#x7684;, &#x4F1A;&#x52A0;&#x5165;&#x5230; _reday &#x961F;&#x5217;&#x4E2D;</span>
+    <span class="hljs-comment"># type: asyncio.base_events.BaseEventLoop._ready</span>
+    <span class="hljs-comment"># _ready : type: collections.queue</span>
+    self._ready.append(handle)
+</code></pre>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x518D;&#x5F80; <code>_process_events</code> &#x4E0B;&#x9762;&#x770B;</p>
+<pre><code class="lang-python">    end_time = self.time() + self._clock_resolution
+    <span class="hljs-comment"># &#x5F53;&#x6709;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;, &#x4E14;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5230;&#x4E86;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x65F6;, &#x5C31;&#x4F1A;&#x5C06;&#x5B83;&#x653E;&#x5165;&#x5230;self._ready&#x4E2D;&#x53BB;&#x6267;&#x884C;</span>
+    <span class="hljs-comment"># &#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x91CC;&#x5904;&#x7406;&#x7684;&#x4EFB;&#x52A1;, &#x57FA;&#x672C;&#x90FD;&#x662F;TimerHandler</span>
+    <span class="hljs-keyword">while</span> self._scheduled:
+        handle = self._scheduled[<span class="hljs-number">0</span>]
+        <span class="hljs-keyword">if</span> handle._when &gt;= end_time:
+            <span class="hljs-keyword">break</span>
+        handle = heapq.heappop(self._scheduled)
+        handle._scheduled = <span class="hljs-keyword">False</span>
+        self._ready.append(handle)
+
+    ntodo = len(self._ready)
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(ntodo):
+        handle = self._ready.popleft()
+        <span class="hljs-keyword">if</span> handle._cancelled:
+            <span class="hljs-keyword">continue</span>
+        <span class="hljs-comment"># &#x65E0;&#x8BBA;&#x6211;&#x4EEC;&#x662F;&#x4E0D;&#x662F;&#x51FA;&#x4E8E;DEBUG&#x6A21;&#x5F0F;, &#x90FD;&#x5C06;&#x6267;&#x884C;handle._run()</span>
+        <span class="hljs-comment"># handler type: asyncio.events.Handler._run() </span>
+        <span class="hljs-keyword">if</span> self._debug:
+            <span class="hljs-keyword">try</span>:
+                self._current_handle = handle
+                t0 = self.time()
+                handle._run()
+                dt = self.time() - t0
+                <span class="hljs-keyword">if</span> dt &gt;= self.slow_callback_duration:
+                    logger.warning(<span class="hljs-string">&apos;Executing %s took %.3f seconds&apos;</span>,
+                                   _format_handle(handle), dt)
+            <span class="hljs-keyword">finally</span>:
+                self._current_handle = <span class="hljs-keyword">None</span>
+        <span class="hljs-keyword">else</span>:
+            handle._run()
+    handle = <span class="hljs-keyword">None</span>  <span class="hljs-comment"># Needed to break cycles when an exception occurs.</span>
+</code></pre>
+<p><code>asyncio.events.Handle._run</code> </p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_run</span><span class="hljs-params">(self)</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># &#x90A3;&#x4E48;&#x8FD9;&#x91CC;_callback&#x5C31;&#x4E0D;&#x7528;&#x5728;&#x8BF4;&#x4E86;, &#x5C31;&#x662F;&#x53BB;&#x6267;&#x884C;&#x6211;&#x4EEC;_ready&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#x4E86;</span>
+        self._callback(*self._args)
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> exc:
+        cb = _format_callback_source(self._callback, self._args)
+        msg = <span class="hljs-string">&apos;Exception in callback {}&apos;</span>.format(cb)
+        context = {
+            <span class="hljs-string">&apos;message&apos;</span>: msg,
+            <span class="hljs-string">&apos;exception&apos;</span>: exc,
+            <span class="hljs-string">&apos;handle&apos;</span>: self,
+        }
+        <span class="hljs-keyword">if</span> self._source_traceback:
+            context[<span class="hljs-string">&apos;source_traceback&apos;</span>] = self._source_traceback
+        <span class="hljs-comment"># &#x5982;&#x679C;&#x6355;&#x6349;&#x5230;&#x5F02;&#x5E38;&#x4E86;, &#x540C;&#x6837;&#x7684;, &#x8FD8;&#x662F;&#x52A0;&#x5165;&#x5230;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x4E2D;&#x53BB;&#x6267;&#x884C;</span>
+        <span class="hljs-comment"># type: asyncio.base_events.BaseEventLoop.call_exception_handler</span>
+        self._loop.call_exception_handler(context)
+    self = <span class="hljs-keyword">None</span>  <span class="hljs-comment"># Needed to break cycles when an exception occurs.</span>
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x672C;&#x6587;&#x7684;&#x6838;&#x5FC3;&#x91CD;&#x70B9;&#x5E76;&#x4E0D;&#x5728; <code>asyncio</code> &#x4E0A; , &#x6240;&#x4EE5;&#x5173;&#x4E8E; <code>asyncio</code> &#x5E76;&#x6CA1;&#x6709;&#x8FC7;&#x591A;&#x89E3;&#x91CA;</p>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x8282;&#x6E90;&#x7801;&#x5206;&#x6790; , &#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x77E5;&#x9053; , &#x5728; <code>Tornado</code> &#x6216;&#x8005;&#x8BF4; <code>asyncio</code> &#x4E2D; , &#x5F02;&#x6B65;&#x975E;&#x963B;&#x585E;&#x6A21;&#x578B;&#x7684;&#x5B9E;&#x73B0; , &#x5B9E;&#x9645;&#x4E0A;&#x53EA;&#x662F;&#x5E94;&#x7528;&#x5C42;&#x7684;&#x5F02;&#x6B65;&#x975E;&#x963B;&#x585E; , &#x5728;&#x7CFB;&#x7EDF;&#x5C42;&#x8FD8;&#x662F;&#x4F7F;&#x7528;&#x7684;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x4E5F;&#x5C31;&#x662F;&#x540C;&#x6B65;IO&#x53BB;&#x5B9E;&#x73B0;&#x7684;</p>
+<p>&#x4E14; <code>callback</code> &#x5982;&#x679C;&#x8BA1;&#x7B97;&#x8FC7;&#x4E45; , &#x540C;&#x6837;&#x4E5F;&#x4F1A;&#x9020;&#x6210;&#x6574;&#x4E2A;&#x7EBF;&#x7A0B;&#x963B;&#x585E; , &#x6240;&#x4EE5;&#x5982;&#x679C;&#x8BA1;&#x7B97;&#x8FC7;&#x957F;&#x7684;&#x51FD;&#x6570; , &#x53EF;&#x4EE5;&#x5206;&#x6210;&#x591A;&#x4E2A;&#x51FD;&#x6570; , &#x6216;&#x8005;&#x5229;&#x7528;&#x7EBF;&#x7A0B;&#x6C60;&#x6765;&#x5904;&#x7406;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="09-asyncio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: asyncio">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"IOLoop","level":"1.13","depth":1,"previous":{"title":"asyncio","level":"1.12","depth":1,"path":"09-asyncio.md","ref":"09-asyncio.md","articles":[]},"dir":"ltr"},"config":{"plugins":["advanced-emoji","toggle-chapters","theme-comscore","splitter","github","github-buttons@2.1.0","-sharing","-lunr","-search","search-plus","anchor-navigation-ex-toc@0.0.9","editlink","fontsettings","copy-code-button","lightbox","favicon"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/attack-on-backend/tornado"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/attack-on-backend/tornado/blob/master"},"splitter":{},"anchor-navigation-ex-toc":{"associatedWithSummary":true,"float":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"highlight":{},"favicon":{"shortcut":"assets/images/favicom.jpg","bookmark":"assets/images/favicom.jpg","appleTouch":"assets/images/favicom.jpg","appleTouchMore":{"120x120":"assets/images/favicom.jpg","180x180":"assets/images/favicom.jpg"}},"lightbox":{"jquery":true,"sameUuid":false},"theme-comscore":{},"github-buttons":{"repo":"attack-on-backend/tornado","types":["star"],"size":"small"},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"search-plus":{}},"theme":"default","author":"Lyon","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":18,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"进击的Tornado","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null}},"gitbook":"*","description":"Attack on backend","extension":null},"file":{"path":"10-IOLoop.md","mtime":"2021-10-20T15:49:27.154Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-20T15:50:17.040Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

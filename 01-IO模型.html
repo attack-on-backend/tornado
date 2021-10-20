@@ -1,0 +1,515 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>IO模型 · 进击的Tornado</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Lyon">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchor-navigation-ex-toc/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="02-BIO实现.html" />
+    
+    
+    <link rel="prev" href="SUMMARY.html" />
+    
+
+    
+        <link rel="shortcut icon" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="apple-touch-icon" href='assets/images/favicom.jpg'>
+    
+    
+        
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicom.jpg">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicom.jpg">
+        
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"attack-on-backend/tornado","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="01-IO模型.html">
+            
+                <a href="01-IO模型.html">
+            
+                    
+                    IO模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="02-BIO实现.html">
+            
+                <a href="02-BIO实现.html">
+            
+                    
+                    BIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="03-NIO实现.html">
+            
+                <a href="03-NIO实现.html">
+            
+                    
+                    NIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="04-IO-Multiplexing实现.html">
+            
+                <a href="04-IO-Multiplexing实现.html">
+            
+                    
+                    IO-Multiplexing实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="05-SIGIO实现.html">
+            
+                <a href="05-SIGIO实现.html">
+            
+                    
+                    SIGIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="06-AIO实现.html">
+            
+                <a href="06-AIO实现.html">
+            
+                    
+                    AIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="07-生成器.html">
+            
+                <a href="07-生成器.html">
+            
+                    
+                    生成器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="08-协程.html">
+            
+                <a href="08-协程.html">
+            
+                    
+                    协程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="09-AIO协程实现.html">
+            
+                <a href="09-AIO协程实现.html">
+            
+                    
+                    AIO协程实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="09-asyncio.html">
+            
+                <a href="09-asyncio.html">
+            
+                    
+                    asyncio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="10-IOLoop.html">
+            
+                <a href="10-IOLoop.html">
+            
+                    
+                    IOLoop
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >IO模型</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---io&#x6A21;&#x578B;-&#x1F32A;"><b></b>Attack on Tornado - IO&#x6A21;&#x578B; &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><ul><li><span class="title-icon "></span><a href="#&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;"><b></b>&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;</a></li><li><span class="title-icon "></span><a href="#&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;"><b></b>&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;</a></li></ul><li><span class="title-icon "></span><a href="#&#x963B;&#x585E;io"><b></b>&#x963B;&#x585E;IO</a></li><li><span class="title-icon "></span><a href="#&#x975E;&#x963B;&#x585E;io"><b></b>&#x975E;&#x963B;&#x585E;IO</a></li><li><span class="title-icon "></span><a href="#io&#x591A;&#x8DEF;&#x590D;&#x7528;"><b></b>IO&#x591A;&#x8DEF;&#x590D;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x4FE1;&#x53F7;&#x9A71;&#x52A8;io"><b></b>&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO</a></li><li><span class="title-icon "></span><a href="#&#x5F02;&#x6B65;io"><b></b>&#x5F02;&#x6B65;IO</a></li><li><span class="title-icon "></span><a href="#io&#x6A21;&#x578B;&#x6BD4;&#x8F83;"><b></b>IO&#x6A21;&#x578B;&#x6BD4;&#x8F83;</a></li></ul></ul></div><a href="#attack-on-tornado---io&#x6A21;&#x578B;-&#x1F32A;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="attack-on-tornado---io&#x6A21;&#x578B;-&#x1F32A;"><a name="attack-on-tornado---io&#x6A21;&#x578B;-&#x1F32A;" class="anchor-navigation-ex-anchor" href="#attack-on-tornado---io&#x6A21;&#x578B;-&#x1F32A;"><i class="fa fa-link" aria-hidden="true"></i></a>Attack on Tornado - IO&#x6A21;&#x578B; &#x1F32A;</h1>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---io&#x6A21;&#x578B;-&#x1F32A;"><b></b>Attack on Tornado - IO&#x6A21;&#x578B; &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><ul><li><span class="title-icon "></span><a href="#&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;"><b></b>&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;</a></li><li><span class="title-icon "></span><a href="#&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;"><b></b>&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;</a></li></ul><li><span class="title-icon "></span><a href="#&#x963B;&#x585E;io"><b></b>&#x963B;&#x585E;IO</a></li><li><span class="title-icon "></span><a href="#&#x975E;&#x963B;&#x585E;io"><b></b>&#x975E;&#x963B;&#x585E;IO</a></li><li><span class="title-icon "></span><a href="#io&#x591A;&#x8DEF;&#x590D;&#x7528;"><b></b>IO&#x591A;&#x8DEF;&#x590D;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x4FE1;&#x53F7;&#x9A71;&#x52A8;io"><b></b>&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO</a></li><li><span class="title-icon "></span><a href="#&#x5F02;&#x6B65;io"><b></b>&#x5F02;&#x6B65;IO</a></li><li><span class="title-icon "></span><a href="#io&#x6A21;&#x578B;&#x6BD4;&#x8F83;"><b></b>IO&#x6A21;&#x578B;&#x6BD4;&#x8F83;</a></li></ul></ul></div>
+
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
+<p>&#x5728;&#x5F00;&#x59CB;&#x4ECB;&#x7ECD;IO&#x6A21;&#x578B;&#x4E4B;&#x524D; , &#x6211;&#x4EEC;&#x9700;&#x8981;&#x5F04;&#x6E05;&#x695A;&#x4E24;&#x7EC4;&#x6982;&#x5FF5; <strong>&#x963B;&#x585E;</strong> , <strong>&#x975E;&#x963B;&#x585E;</strong> , <strong>&#x540C;&#x6B65;</strong> , <strong>&#x5F02;&#x6B65;</strong></p>
+<p>&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x5BB9;&#x6613;&#x628A;&#x8FD9;&#x4E24;&#x7EC4;&#x6982;&#x5FF5;&#x6DF7;&#x6DC6; , &#x6BD4;&#x5982;: &#x540C;&#x6B65;&#x548C;&#x963B;&#x585E;&#x5728;&#x6211;&#x4EEC;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#x597D;&#x50CF;&#x662F;&#x4E00;&#x6837;&#x7684;? &#x5F02;&#x6B65;&#x548C;&#x975E;&#x963B;&#x585E;&#x4E5F;&#x597D;&#x50CF;&#x6CA1;&#x4EC0;&#x4E48;&#x533A;&#x522B;</p>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x4E24;&#x7EC4;&#x6982;&#x5FF5; , &#x53EF;&#x80FD;&#x4ECE;&#x67D0;&#x4E9B;&#x73B0;&#x8C61;&#x6765;&#x8BF4;&#x662F;&#x6709;&#x70B9;&#x76F8;&#x4F3C; , &#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x5B83;&#x4EEC;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x5176;&#x5B9E;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684; </p>
+<h3 id="&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;"><a name="&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;" class="anchor-navigation-ex-anchor" href="#&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x540C;&#x6B65;&#x4E0E;&#x5F02;&#x6B65;</h3>
+<p>&#x540C;&#x6B65;&#x548C;&#x5F02;&#x6B65;&#x5173;&#x6CE8;&#x7684;&#x662F;&#x6D88;&#x606F;&#x901A;&#x4FE1;&#x673A;&#x5236; , &#x4E5F;&#x5C31;&#x662F;&#x540C;&#x6B65;&#x901A;&#x4FE1;&#x8FD8;&#x662F;&#x5F02;&#x6B65;&#x901A;&#x4FE1;</p>
+<p>&#x6240;&#x8C13;&#x540C;&#x6B65; , &#x5C31;&#x662F;&#x5728;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x8C03;&#x7528;&#x65F6; , &#x5728;&#x6CA1;&#x6709;&#x5F97;&#x5230;&#x7ED3;&#x679C;&#x4E4B;&#x524D;&#xFF0C;&#x8BE5;&#x8C03;&#x7528;&#x5C31;&#x4E0D;&#x4F1A;&#x8FD4;&#x56DE; . &#x6309;&#x7167;&#x8FD9;&#x4E2A;&#x5B9A;&#x4E49;&#xFF0C;&#x5176;&#x5B9E;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x51FD;&#x6570;&#x90FD;&#x662F;&#x540C;&#x6B65;&#x8C03;&#x7528; . &#x4F46;&#x662F;&#x4E00;&#x822C;&#x800C;&#x8A00; , &#x6211;&#x4EEC;&#x5728;&#x8BF4;&#x540C;&#x6B65;&#x3001;&#x5F02;&#x6B65;&#x7684;&#x65F6;&#x5019; , &#x7279;&#x6307;&#x90A3;&#x4E9B;&#x9700;&#x8981;&#x5176;&#x4ED6;&#x90E8;&#x4EF6;&#x534F;&#x4F5C;&#x6216;&#x8005;&#x9700;&#x8981;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#x5B8C;&#x6210;&#x7684;&#x4EFB;&#x52A1;</p>
+<p>&#x5F02;&#x6B65;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x540C;&#x6B65;&#x76F8;&#x5BF9; , &#x5F53;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x529F;&#x80FD;&#x8C03;&#x7528;&#x53D1;&#x51FA;&#x540E; , &#x8C03;&#x7528;&#x8005;&#x4E0D;&#x80FD;&#x7ACB;&#x523B;&#x5F97;&#x5230;&#x7ED3;&#x679C; . &#x5F53;&#x8BE5;&#x5F02;&#x6B65;&#x529F;&#x80FD;&#x5B8C;&#x6210;&#x540E; , &#x901A;&#x8FC7;&#x72B6;&#x6001;&#x3001;&#x901A;&#x77E5;&#x6216;&#x56DE;&#x8C03;&#x6765;&#x901A;&#x77E5;&#x8C03;&#x7528;&#x8005; , &#x5982;&#x679C;&#x5F02;&#x6B65;&#x529F;&#x80FD;&#x7528;&#x72B6;&#x6001;&#x6765;&#x901A;&#x77E5; , &#x90A3;&#x4E48;&#x8C03;&#x7528;&#x8005;&#x5C31;&#x9700;&#x8981;&#x6BCF;&#x9694;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#x68C0;&#x67E5;&#x4E00;&#x6B21; , &#x6548;&#x7387;&#x5C31;&#x5F88;&#x4F4E;(&#x6709;&#x4E9B;&#x521D;&#x5B66;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x7684;&#x4EBA; , &#x603B;&#x559C;&#x6B22;&#x7528;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#x53BB;&#x68C0;&#x67E5;&#x67D0;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x503C; , &#x8FD9;&#x5176;&#x5B9E;&#x662F;&#x4E00; &#x79CD;&#x5F88;&#x4E25;&#x91CD;&#x7684;&#x9519;&#x8BEF;) . &#x5982;&#x679C;&#x662F;&#x4F7F;&#x7528;&#x901A;&#x77E5;&#x7684;&#x65B9;&#x5F0F; , &#x6548;&#x7387;&#x5219;&#x5F88;&#x9AD8; , &#x56E0;&#x4E3A;&#x5F02;&#x6B65;&#x529F;&#x80FD;&#x51E0;&#x4E4E;&#x4E0D;&#x9700;&#x8981;&#x505A;&#x989D;&#x5916;&#x7684;&#x64CD;&#x4F5C; . &#x81F3;&#x4E8E;&#x56DE;&#x8C03;&#x51FD;&#x6570; , &#x5176;&#x5B9E;&#x548C;&#x901A;&#x77E5;&#x6CA1;&#x592A;&#x591A;&#x533A;&#x522B;</p>
+<h3 id="&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;"><a name="&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;" class="anchor-navigation-ex-anchor" href="#&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x963B;&#x585E;&#x975E;&#x963B;&#x585E;</h3>
+<p>&#x963B;&#x585E;&#x548C;&#x975E;&#x963B;&#x585E;&#x5173;&#x6CE8;&#x7684;&#x662F;&#x7A0B;&#x5E8F;&#x5728;&#x7B49;&#x5F85;&#x8C03;&#x7528;&#x7ED3;&#x679C;&#x65F6;&#x7684;&#x72B6;&#x6001;</p>
+<p>&#x963B;&#x585E;&#x8C03;&#x7528;&#x662F;&#x6307;&#x8C03;&#x7528;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#x4E4B;&#x524D;&#xFF0C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x6302;&#x8D77;&#xFF08;&#x5982;&#x9047;&#x5230;io&#x64CD;&#x4F5C;&#xFF09;&#x3002;&#x51FD;&#x6570;&#x53EA;&#x6709;&#x5728;&#x5F97;&#x5230;&#x7ED3;&#x679C;&#x4E4B;&#x540E;&#x624D;&#x4F1A;&#x5C06;&#x963B;&#x585E;&#x7684;&#x7EBF;&#x7A0B;&#x6FC0;&#x6D3B;&#x3002;&#x6709;&#x4EBA;&#x4E5F;&#x8BB8;&#x4F1A;&#x628A;&#x963B;&#x585E;&#x8C03;&#x7528;&#x548C;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x7B49;&#x540C;&#x8D77;&#x6765;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x4ED6;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x3002;&#x5BF9;&#x4E8E;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x6765;&#x8BF4;&#xFF0C;&#x5F88;&#x591A;&#x65F6;&#x5019;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x8FD8;&#x662F;&#x6FC0;&#x6D3B;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x4ECE;&#x903B;&#x8F91;&#x4E0A;&#x5F53;&#x524D;&#x51FD;&#x6570;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x800C;&#x5DF2;</p>
+<p>&#x975E;&#x963B;&#x585E;&#x548C;&#x963B;&#x585E;&#x7684;&#x6982;&#x5FF5;&#x76F8;&#x5BF9;&#x5E94;&#xFF0C;&#x6307;&#x5728;&#x4E0D;&#x80FD;&#x7ACB;&#x523B;&#x5F97;&#x5230;&#x7ED3;&#x679C;&#x4E4B;&#x524D;&#x4E5F;&#x4F1A;&#x7ACB;&#x523B;&#x8FD4;&#x56DE;&#xFF0C;&#x540C;&#x65F6;&#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</p>
+<p>&#x5F04;&#x6E05;&#x695A;&#x8FD9;&#x4E24;&#x7EC4;&#x6982;&#x5FF5;&#x6211;&#x4EEC;&#x624D;&#x80FD;&#x66F4;&#x597D;&#x7684;&#x53BB;&#x7406;&#x89E3;&#x63A5;&#x4E0B;&#x6765;&#x7684;IO&#x6A21;&#x578B;</p>
+<p>&#x5728;I/O&#x6D41;&#x7A0B;&#x4E2D; , &#x4E00;&#x822C;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4E24;&#x4E2A;&#x9636;&#x6BB5; : </p>
+<ol>
+<li>&#x6570;&#x636E;&#x51C6;&#x5907;&#x9636;&#x6BB5; , &#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x63A5;&#x6536;&#x7F51;&#x7EDC;&#x6570;&#x636E; , &#x5F53;&#x6570;&#x636E;&#x5305;&#x5230;&#x8FBE;&#x65F6; , &#x5185;&#x6838;&#x4F1A;&#x5C06;&#x6570;&#x636E;&#x5305;&#x62F7;&#x8D1D;&#x5230;&#x5185;&#x6838;&#x7F13;&#x51B2;&#x533A;</li>
+<li>&#x6570;&#x636E;&#x62F7;&#x8D1D;&#x9636;&#x6BB5; , &#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#x6570;&#x636E;&#x5305;&#x4F1A;&#x4ECE;&#x5185;&#x6838;&#x7F13;&#x51B2;&#x533A;&#x590D;&#x5236;&#x5230;&#x6211;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;&#x533A;</li>
+</ol>
+<p>I/O&#x6A21;&#x578B;&#x7684;&#x5DEE;&#x5F02;&#x5C31;&#x6765;&#x81EA;&#x4E8E;&#x5728;&#x8FD9;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#x4E0A; , &#x4E0D;&#x540C;&#x7684;I/O&#x6A21;&#x578B;&#x6709;&#x4F1A;&#x4E0D;&#x540C;&#x7684;&#x8868;&#x73B0;</p>
+<h2 id="&#x963B;&#x585E;io"><a name="&#x963B;&#x585E;io" class="anchor-navigation-ex-anchor" href="#&#x963B;&#x585E;io"><i class="fa fa-link" aria-hidden="true"></i></a>&#x963B;&#x585E;IO</h2>
+<p><a href="assert/&#x963B;&#x585E;IO.png" data-lightbox="5e5637fa-6b18-4676-b91a-728f304bdce0" data-title="&#x963B;&#x585E;IO"><img src="assert/&#x963B;&#x585E;IO.png" alt="&#x963B;&#x585E;IO"></a></p>
+<p>&#x5728;Linux&#x4E2D; , &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x6240;&#x6709;&#x7684; <code>socket</code> &#x90FD;&#x662F;&#x963B;&#x585E;&#x7684; , &#x6D41;&#x7A0B;&#x5982;&#x4E0A;&#x56FE;</p>
+<p>&#x5F53;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x8C03;&#x7528;&#x4E86; <code>recvfrom</code> &#x8FD9;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x65F6; , <code>kernel</code> &#x5C31;&#x8FDB;&#x5165;&#x4E86;&#x7B2C;&#x4E00;&#x4E2A;&#x9636;&#x6BB5; , &#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#x6574;&#x4E2A;&#x8FDB;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E; , <code>kernel</code> &#x7B49;&#x5230;&#x6570;&#x636E;&#x51C6;&#x5907;&#x597D;&#x4E86;&#x4E4B;&#x540E; , &#x5C31;&#x4F1A;&#x5C06;&#x6570;&#x636E;&#x4ECE; <code>kernel</code> &#x62F7;&#x8D1D;&#x5230;&#x7528;&#x6237;&#x5185;&#x5B58; , &#x7136;&#x540E; <code>kernel</code> &#x8FD4;&#x56DE;&#x7ED3;&#x679C; , &#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x624D;&#x89E3;&#x9664;&#x963B;&#x585E;&#x72B6;&#x6001; , &#x7EE7;&#x7EED;&#x6267;&#x884C;</p>
+<p><strong>&#x6240;&#x4EE5; , &#x963B;&#x585E;IO&#x7684;&#x7279;&#x70B9;&#x5C31;&#x662F;&#x5728;IO&#x6267;&#x884C;&#x7684;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x90FD;&#x88AB;&#x963B;&#x585E;&#x4E86;</strong></p>
+<h2 id="&#x975E;&#x963B;&#x585E;io"><a name="&#x975E;&#x963B;&#x585E;io" class="anchor-navigation-ex-anchor" href="#&#x975E;&#x963B;&#x585E;io"><i class="fa fa-link" aria-hidden="true"></i></a>&#x975E;&#x963B;&#x585E;IO</h2>
+<p>&#x5F88;&#x660E;&#x663E; , &#x963B;&#x585E;IO&#x5BF9;CPU&#x662F;&#x4E00;&#x79CD;&#x6781;&#x5927;&#x7684;&#x6D6A;&#x8D39; , &#x5927;&#x90E8;&#x5206;&#x65F6;&#x95F4;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x90FD;&#x662F;&#x963B;&#x585E;&#x7684;</p>
+<p><a href="assert/&#x975E;&#x963B;&#x585E;IO.png" data-lightbox="5a4a09de-f45d-420d-bf9d-d57b43694a20" data-title="&#x975E;&#x963B;&#x585E;IO"><img src="assert/&#x975E;&#x963B;&#x585E;IO.png" alt="&#x975E;&#x963B;&#x585E;IO"></a></p>
+<p>&#x5728;&#x975E;&#x963B;&#x585E;IO&#x4E2D; , &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06; <code>socket</code> &#x8BBE;&#x7F6E;&#x6210;&#x975E;&#x963B;&#x585E; , &#x800C;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5728;&#x8C03;&#x7528; <code>recvfrom</code> &#x65F6; , &#x5982;&#x679C;&#x6570;&#x636E;&#x6CA1;&#x6709;&#x51C6;&#x5907;&#x597D; , &#x90A3;&#x4E48;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; <code>error</code> , &#x8FD9;&#x6837;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5C31;&#x77E5;&#x9053;&#x6570;&#x636E;&#x8FD8;&#x6CA1;&#x6709;&#x51C6;&#x5907;&#x597D; , &#x4E8E;&#x662F;&#x5B83;&#x53EF;&#x4EE5;&#x518D;&#x6B21;&#x53D1;&#x9001; <code>recvfrom</code> &#x7CFB;&#x7EDF;&#x8C03;&#x7528; , &#x76F4;&#x5230;&#x6570;&#x636E;&#x51C6;&#x5907;&#x5B8C;&#x6210; , &#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x963B;&#x585E; , <code>kernel</code> &#x5F00;&#x59CB;&#x62F7;&#x8D1D;&#x6570;&#x636E;&#x5230;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;&#x533A; , &#x62F7;&#x8D1D;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x89E3;&#x9664;&#x963B;&#x585E;</p>
+<p><strong>&#x6240;&#x4EE5; , &#x975E;&#x963B;&#x585E;IO , &#x7528;&#x6237;&#x5728;&#x6570;&#x636E;&#x51C6;&#x5907;&#x9636;&#x6BB5;&#x4F1A;&#x4E0D;&#x65AD;&#x7684;&#x8F6E;&#x8BE2; <code>kernel</code> , &#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x662F;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#x7684; , &#x4F46;&#x662F;&#x5728;&#x6570;&#x636E;&#x62F7;&#x8D1D;&#x9636;&#x6BB5; <code>recvfrom</code> &#x4F9D;&#x7136;&#x662F;&#x963B;&#x585E;&#x7684;</strong></p>
+<p>&#x867D;&#x7136;&#x975E;&#x963B;&#x585E;IO&#x6A21;&#x578B;&#x5728;&#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#x4E86; , &#x4F46;&#x662F;&#x5927;&#x91CF;&#x7684; <code>recvfrom</code> &#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x4F1A;&#x5927;&#x5E45;&#x5EA6;&#x63D0;&#x9AD8; CPU &#x7684;&#x6682;&#x7528;&#x7387; , &#x4E14;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x5F88;&#x591A;&#x65E0;&#x6548;&#x7684; <code>recvfrom</code> , &#x6240;&#x4EE5;&#x975E;&#x963B;&#x585E;IO&#x6A21;&#x578B;&#x4E00;&#x822C;&#x4E0D;&#x88AB;&#x63A8;&#x8350;</p>
+<h2 id="io&#x591A;&#x8DEF;&#x590D;&#x7528;"><a name="io&#x591A;&#x8DEF;&#x590D;&#x7528;" class="anchor-navigation-ex-anchor" href="#io&#x591A;&#x8DEF;&#x590D;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>IO&#x591A;&#x8DEF;&#x590D;&#x7528;</h2>
+<p><a href="assert/IO&#x591A;&#x8DEF;&#x590D;&#x7528;.png" data-lightbox="d1bf1545-04db-4f3b-96a1-15408790cc9a" data-title="IO&#x591A;&#x8DEF;&#x590D;&#x7528;"><img src="assert/IO&#x591A;&#x8DEF;&#x590D;&#x7528;.png" alt="IO&#x591A;&#x8DEF;&#x590D;&#x7528;"></a></p>
+<p>&#x5728;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x4E2D; , &#x6211;&#x4EEC;&#x5728;&#x8C03;&#x7528; <code>recvfrom</code> &#x4E4B;&#x524D; , &#x5148;&#x8C03;&#x7528; <code>select</code> , <code>select</code> &#x4F1A;&#x4E0D;&#x65AD;&#x8F6E;&#x8BE2;&#x6240;&#x4EE5;&#x7684; <code>socket</code> (<code>socket</code> &#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x6210; <code>nonblocking</code> ) , &#x76F4;&#x5230; <code>select</code> &#x4E2D;&#x67D0;&#x4E2A; <code>socket</code> &#x6709;&#x6570;&#x636E;&#x624D;&#x8FD4;&#x56DE; , &#x5426;&#x5219;&#x5C06;&#x4F1A;&#x4E00;&#x76F4;&#x963B;&#x585E;</p>
+<p>&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x62FF;&#x5230;&#x53EF;&#x8BFB;&#x7684; <code>socket</code> &#x65F6; , &#x6B64;&#x65F6;&#x518D;&#x53BB;&#x8C03;&#x7528; <code>recvfrom</code> &#x5C06;&#x6570;&#x636E;&#x590D;&#x5236;&#x5230;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;&#x533A;</p>
+<p><strong>&#x6240;&#x4EE5; , IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x7684;&#x7279;&#x70B9;&#x5C31;&#x662F;&#x63D0;&#x9AD8;&#x4E86; <code>recvfrom</code> &#x7684;&#x6548;&#x7387; , &#x53EA;&#x6709;&#x5F53;&#x6570;&#x636E;&#x51C6;&#x5907;&#x597D;&#x65F6;&#x624D;&#x4F1A;&#x53BB;&#x8C03;&#x7528; , &#x4E0D;&#x8FC7;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x591A;&#x51FA;&#x4E86;&#x4E00;&#x4E2A; <code>select</code> &#x7CFB;&#x7EDF;&#x8C03;&#x7528;</strong></p>
+<p>IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x6709; :<code>select</code> , <code>poll</code> , <code>epoll</code> , <code>kqueue</code> &#x7B49;&#x7B49;</p>
+<h2 id="&#x4FE1;&#x53F7;&#x9A71;&#x52A8;io"><a name="&#x4FE1;&#x53F7;&#x9A71;&#x52A8;io" class="anchor-navigation-ex-anchor" href="#&#x4FE1;&#x53F7;&#x9A71;&#x52A8;io"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO</h2>
+<p><a href="assert/&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO.png" data-lightbox="948ee056-46bd-4450-a5c0-f05e044fec32" data-title="&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO"><img src="assert/&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO.png" alt="&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO"></a></p>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x5728;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x4E2D; , <code>select</code> &#x8FD8;&#x662F;&#x4F1A;&#x963B;&#x585E;&#x7528;&#x6237;&#x8FDB;&#x7A0B; , &#x800C;&#x5728;&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO&#x4E2D; , &#x9996;&#x5148;&#x5F00;&#x542F;&#x5957;&#x63A5;&#x5B57;&#x7684;&#x4FE1;&#x53F7;&#x9A71;&#x52A8;&#x529F;&#x80FD; , &#x7136;&#x540E;&#x4F7F;&#x7528; <code>sigaction</code> &#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7ED1;&#x5B9A;&#x4FE1;&#x53F7;&#x5904;&#x7406;&#x7A0B;&#x5E8F; , &#x8FD9;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x662F;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x7684; </p>
+<p>&#x5F53;&#x6570;&#x636E;&#x51C6;&#x5907;&#x597D;&#x65F6; , &#x5185;&#x6838;&#x4F1A;&#x5411;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x53D1;&#x9001; <code>SIGIO</code> &#x4FE1;&#x53F7; , &#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#x5728;&#x63A5;&#x6536;&#x5230;&#x4FE1;&#x53F7;&#x4E4B;&#x540E;&#x518D;&#x8C03;&#x7528; <code>recvfrom</code> &#x5C06;&#x6570;&#x636E;&#x4ECE;&#x5185;&#x6838;&#x590D;&#x5236;&#x5230;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;&#x533A;&#x4E2D;</p>
+<p><strong>&#x6240;&#x4EE5; , &#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO&#x7684;&#x7279;&#x70B9;&#x5C31;&#x662F;&#x5728;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x7684;&#x57FA;&#x7840;&#x4E0A; , &#x628A; <code>select</code> &#x8FD9;&#x4E00;&#x4E2A;&#x963B;&#x585E;&#x8C03;&#x7528;&#x4E5F;&#x53BB;&#x9664;&#x4E86; , &#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#x5B8C;&#x5168;&#x975E;&#x963B;&#x585E; , &#x5F53;&#x7136;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x8FD8;&#x662F;&#x963B;&#x585E;&#x7684;</strong></p>
+<h2 id="&#x5F02;&#x6B65;io"><a name="&#x5F02;&#x6B65;io" class="anchor-navigation-ex-anchor" href="#&#x5F02;&#x6B65;io"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5F02;&#x6B65;IO</h2>
+<p><a href="assert/&#x5F02;&#x6B65;IO.png" data-lightbox="5d379736-64ca-4364-9e05-283170fd1a9f" data-title="&#x5F02;&#x6B65;IO"><img src="assert/&#x5F02;&#x6B65;IO.png" alt="&#x5F02;&#x6B65;IO"></a></p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x5206;&#x6790;&#x4E86;&#x963B;&#x585E;IO , &#x975E;&#x963B;&#x585E;IO , IO&#x591A;&#x8DEF;&#x590D;&#x7528; , &#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO , &#x5B9E;&#x9645;&#x4E0A;&#x90FD;&#x6CA1;&#x6709;&#x89E3;&#x51B3;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x7684;&#x963B;&#x585E;&#x95EE;&#x9898;</p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x963B;&#x585E;IO , &#x975E;&#x963B;&#x585E;IO , IO&#x591A;&#x8DEF;&#x590D;&#x7528; , &#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO &#x90FD;&#x5C5E;&#x4E8E;&#x540C;&#x6B65;IO</p>
+<p>&#x90A3;&#x5C31;&#x660E;&#x4E86;&#x4E86; , &#x5F02;&#x6B65;IO&#x5C31;&#x662F;&#x5B9E;&#x73B0;&#x4E24;&#x9636;&#x6BB5;&#x5168;&#x90E8;&#x975E;&#x963B;&#x585E;</p>
+<p>&#x5F53;&#x8BF7;&#x6C42;&#x8FDB;&#x7A0B;&#x53D1;&#x8D77;&#x8BFB;&#x64CD;&#x4F5C;&#x65F6; , &#x5185;&#x6838;&#x4F1A;&#x7ACB;&#x523B;&#x8FD4;&#x56DE; , &#x4E0D;&#x4F1A;&#x963B;&#x585E;&#x8BF7;&#x6C42;&#x8FDB;&#x7A0B; , &#x5185;&#x6838;&#x5728;&#x6570;&#x636E;&#x51C6;&#x5907;&#x5B8C;&#x6210;&#x540E; , &#x4F1A;&#x5C06;&#x6570;&#x636E;&#x62F7;&#x8D1D;&#x5230;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x7F13;&#x51B2;&#x533A; , &#x5F53;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x5DE5;&#x4F5C;&#x5168;&#x90E8;&#x5B8C;&#x6210; , &#x5185;&#x6838;&#x4F1A;&#x901A;&#x77E5;&#x8BF7;&#x6C42;&#x8FDB;&#x7A0B; , IO&#x64CD;&#x4F5C;&#x5DF2;&#x5B8C;&#x6210;</p>
+<p><strong>&#x6240;&#x4EE5; , &#x5F02;&#x6B65;IO&#x7684;&#x7279;&#x70B9;&#x5C31;&#x662F;&#x4FE1;&#x53F7;&#x9A71;&#x52A8;IO&#x662F;&#x901A;&#x77E5;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x62F7;&#x8D1D;&#x4E86; , &#x800C;&#x5F02;&#x6B65;IO&#x5219;&#x662F;&#x901A;&#x77E5;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5DF2;&#x7ECF;&#x62F7;&#x8D1D;&#x5B8C;&#x6210;&#x4E86; , &#x5B9E;&#x73B0;&#x771F;&#x6B63;&#x7684;&#x4E24;&#x9636;&#x6BB5;&#x975E;&#x963B;&#x585E;</strong></p>
+<p>&#x5F02;&#x6B65;IO&#x597D;&#x662F;&#x597D; , &#x4F46;&#x662F;&#x5F53;&#x524D;Linux&#x5BF9;&#x5F02;&#x6B65;IO&#x7684;&#x652F;&#x6301;&#x5E76;&#x4E0D;&#x6210;&#x719F; , &#x66F4;&#x591A;&#x7684;&#x8FD8;&#x662F;&#x57FA;&#x4E8E;IO&#x591A;&#x8DEF;&#x590D;&#x7528;&#x53BB;&#x8FBE;&#x5230;&#x6211;&#x4EEC;&#x7684;&#x7528;&#x6237;&#x5C42;&#x5F02;&#x6B65;</p>
+<h2 id="io&#x6A21;&#x578B;&#x6BD4;&#x8F83;"><a name="io&#x6A21;&#x578B;&#x6BD4;&#x8F83;" class="anchor-navigation-ex-anchor" href="#io&#x6A21;&#x578B;&#x6BD4;&#x8F83;"><i class="fa fa-link" aria-hidden="true"></i></a>IO&#x6A21;&#x578B;&#x6BD4;&#x8F83;</h2>
+<p><a href="assert/IO&#x6A21;&#x578B;&#x5BF9;&#x6BD4;.png" data-lightbox="184cc49e-94b0-4922-ab01-27818bb8c655" data-title="IO&#x6A21;&#x578B;&#x5BF9;&#x6BD4;"><img src="assert/IO&#x6A21;&#x578B;&#x5BF9;&#x6BD4;.png" alt="IO&#x6A21;&#x578B;&#x5BF9;&#x6BD4;"></a></p>
+<p>&#x6700;&#x540E; , &#x8FD9;&#x4E2A;&#x56FE;&#x5C31;&#x975E;&#x5E38;&#x7684;&#x7B80;&#x5355;&#x4E86;</p>
+<p>&#x540E;&#x7EED;&#x6211;&#x4EEC;&#x6765;&#x901A;&#x8FC7;&#x4EE3;&#x7801;&#x53BB;&#x5B9E;&#x73B0;&#x8FD9;&#x4E9B;IO&#x6A21;&#x578B;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SUMMARY.html" class="navigation navigation-prev " aria-label="Previous page: 目录">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="02-BIO实现.html" class="navigation navigation-next " aria-label="Next page: BIO实现">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"IO模型","level":"1.3","depth":1,"next":{"title":"BIO实现","level":"1.4","depth":1,"path":"02-BIO实现.md","ref":"02-BIO实现.md","articles":[]},"previous":{"title":"目录","level":"1.2","depth":1,"path":"SUMMARY.md","ref":"SUMMARY.md","articles":[]},"dir":"ltr"},"config":{"plugins":["advanced-emoji","toggle-chapters","theme-comscore","splitter","github","github-buttons@2.1.0","-sharing","-lunr","-search","search-plus","anchor-navigation-ex-toc@0.0.9","editlink","fontsettings","copy-code-button","lightbox","favicon"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/attack-on-backend/tornado"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/attack-on-backend/tornado/blob/master"},"splitter":{},"anchor-navigation-ex-toc":{"associatedWithSummary":true,"float":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"highlight":{},"favicon":{"shortcut":"assets/images/favicom.jpg","bookmark":"assets/images/favicom.jpg","appleTouch":"assets/images/favicom.jpg","appleTouchMore":{"120x120":"assets/images/favicom.jpg","180x180":"assets/images/favicom.jpg"}},"lightbox":{"jquery":true,"sameUuid":false},"theme-comscore":{},"github-buttons":{"repo":"attack-on-backend/tornado","types":["star"],"size":"small"},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"search-plus":{}},"theme":"default","author":"Lyon","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":18,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"进击的Tornado","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null}},"gitbook":"*","description":"Attack on backend","extension":null},"file":{"path":"01-IO模型.md","mtime":"2021-10-20T15:49:27.154Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-20T15:50:17.040Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

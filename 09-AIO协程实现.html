@@ -1,0 +1,610 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>AIO协程实现 · 进击的Tornado</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Lyon">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchor-navigation-ex-toc/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="09-asyncio.html" />
+    
+    
+    <link rel="prev" href="08-协程.html" />
+    
+
+    
+        <link rel="shortcut icon" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='assets/images/favicom.jpg' type="image/x-icon">
+    
+    
+        <link rel="apple-touch-icon" href='assets/images/favicom.jpg'>
+    
+    
+        
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicom.jpg">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicom.jpg">
+        
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"attack-on-backend/tornado","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="01-IO模型.html">
+            
+                <a href="01-IO模型.html">
+            
+                    
+                    IO模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="02-BIO实现.html">
+            
+                <a href="02-BIO实现.html">
+            
+                    
+                    BIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="03-NIO实现.html">
+            
+                <a href="03-NIO实现.html">
+            
+                    
+                    NIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="04-IO-Multiplexing实现.html">
+            
+                <a href="04-IO-Multiplexing实现.html">
+            
+                    
+                    IO-Multiplexing实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="05-SIGIO实现.html">
+            
+                <a href="05-SIGIO实现.html">
+            
+                    
+                    SIGIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="06-AIO实现.html">
+            
+                <a href="06-AIO实现.html">
+            
+                    
+                    AIO实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="07-生成器.html">
+            
+                <a href="07-生成器.html">
+            
+                    
+                    生成器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="08-协程.html">
+            
+                <a href="08-协程.html">
+            
+                    
+                    协程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.11" data-path="09-AIO协程实现.html">
+            
+                <a href="09-AIO协程实现.html">
+            
+                    
+                    AIO协程实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="09-asyncio.html">
+            
+                <a href="09-asyncio.html">
+            
+                    
+                    asyncio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="10-IOLoop.html">
+            
+                <a href="10-IOLoop.html">
+            
+                    
+                    IOLoop
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >AIO协程实现</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---aio&#x534F;&#x7A0B;&#x5B9E;&#x73B0;-&#x1F32A;"><b></b>Attack on Tornado - AIO&#x534F;&#x7A0B;&#x5B9E;&#x73B0; &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#aio&#x534F;&#x7A0B;&#x8FDB;&#x9636;"><b></b>AIO&#x534F;&#x7A0B;&#x8FDB;&#x9636;</a></li></ul></ul></div><a href="#attack-on-tornado---aio&#x534F;&#x7A0B;&#x5B9E;&#x73B0;-&#x1F32A;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="attack-on-tornado---aio&#x534F;&#x7A0B;&#x5B9E;&#x73B0;-&#x1F32A;"><a name="attack-on-tornado---aio&#x534F;&#x7A0B;&#x5B9E;&#x73B0;-&#x1F32A;" class="anchor-navigation-ex-anchor" href="#attack-on-tornado---aio&#x534F;&#x7A0B;&#x5B9E;&#x73B0;-&#x1F32A;"><i class="fa fa-link" aria-hidden="true"></i></a>Attack on Tornado - AIO&#x534F;&#x7A0B;&#x5B9E;&#x73B0; &#x1F32A;</h1>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#attack-on-tornado---aio&#x534F;&#x7A0B;&#x5B9E;&#x73B0;-&#x1F32A;"><b></b>Attack on Tornado - AIO&#x534F;&#x7A0B;&#x5B9E;&#x73B0; &#x1F32A;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#aio&#x534F;&#x7A0B;&#x8FDB;&#x9636;"><b></b>AIO&#x534F;&#x7A0B;&#x8FDB;&#x9636;</a></li></ul></ul></div>
+
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
+<p>&#x867D;&#x7136;&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x534F;&#x7A0B;&#x89E3;&#x51B3;&#x4E86;&#x56DE;&#x8C03;&#x5730;&#x72F1;&#x95EE;&#x9898; , &#x4F46;&#x662F;&#x56DE;&#x8C03;&#x6CE8;&#x518C;&#x65B9;&#x5F0F;&#x8FD8;&#x662F;&#x4E0D;&#x591F;&#x7B80;&#x5355; , &#x56E0;&#x4E3A;&#x4F5C;&#x4E3A;&#x7528;&#x6237;&#x6765;&#x8BB2; , &#x6211;&#x4EEC;&#x4E0D;&#x5E94;&#x8BE5;&#x53BB;&#x5173;&#x5FC3;&#x6CE8;&#x518C;&#x56DE;&#x8C03;&#x4E8B;&#x4EF6;</p>
+<p>&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x6709;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x63A7;&#x5236;&#x5668;&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x5E2E;&#x6211;&#x4EEC;&#x6CE8;&#x518C;&#x56DE;&#x8C03; , &#x6211;&#x4EEC;&#x53EA;&#x5173;&#x5FC3;&#x4E1A;&#x52A1;&#x903B;&#x8F91; , &#x800C;&#x5BF9;&#x6211;&#x4EEC;&#x800C;&#x8A00;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5FC5;&#x7136;&#x5904;&#x4E8E;&#x534F;&#x7A0B;&#x4E2D; , &#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x63A7;&#x5236;&#x5668;&#x80AF;&#x5B9A;&#x662F;&#x4ECE;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x5165;&#x624B;&#x4E86;</p>
+<h2 id="aio&#x534F;&#x7A0B;&#x8FDB;&#x9636;"><a name="aio&#x534F;&#x7A0B;&#x8FDB;&#x9636;" class="anchor-navigation-ex-anchor" href="#aio&#x534F;&#x7A0B;&#x8FDB;&#x9636;"><i class="fa fa-link" aria-hidden="true"></i></a>AIO&#x534F;&#x7A0B;&#x8FDB;&#x9636;</h2>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x57FA;&#x7C7B; <code>Event</code> , &#x5176;&#x4E2D;&#x5B9A;&#x4E49;&#x4E24;&#x4E2A; <code>API</code> &#x5206;&#x522B;&#x63A7;&#x5236; : &#x6CE8;&#x518C;&#x56DE;&#x8C03;&#x4E8B;&#x4EF6;&#x4E0E;&#x5904;&#x7406;&#x56DE;&#x8C03;&#x4E8B;&#x4EF6; , &#x968F;&#x540E;&#x6BCF;&#x79CD;&#x4E8B;&#x4EF6;&#x90FD;&#x7EE7;&#x627F;&#x57FA;&#x7C7B; <code>Event</code> , &#x5728;&#x4F7F;&#x7528;&#x65F6; , &#x76F4;&#x63A5;&#x5C06;&#x4E8B;&#x4EF6;&#x63A8;&#x5165;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF; , &#x7EDF;&#x4E00;&#x7531;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x8FDB;&#x884C;&#x8C03;&#x5EA6;</p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Event</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_yield</span><span class="hljs-params">(self, loop, task)</span>:</span>
+        <span class="hljs-string">&quot;&quot;&quot;&#x7528;&#x4E8E;&#x6CE8;&#x518C;&#x56DE;&#x8C03;&quot;&quot;&quot;</span>
+        <span class="hljs-keyword">raise</span> NotImplementedError
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_resume</span><span class="hljs-params">(self, loop, task)</span>:</span>
+        <span class="hljs-string">&quot;&quot;&quot;&#x5904;&#x7406;&#x56DE;&#x8C03;, &#x5E76;&#x5C06;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x653E;&#x5165;&#x51C6;&#x5907;&#x961F;&#x5217;&quot;&quot;&quot;</span>
+        <span class="hljs-keyword">raise</span> NotImplementedError
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E24;&#x79CD;&#x4E8B;&#x4EF6; , <code>Accept</code> &#x548C; <code>Read</code> &#x4E8B;&#x4EF6; , &#x7528;&#x4E8E;&#x63A5;&#x6536;&#x8BF7;&#x6C42;&#x5E76;&#x63A5;&#x6536;&#x8BF7;&#x6C42;&#x4E2D;&#x7684;&#x6570;&#x636E;</p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReadEvent</span><span class="hljs-params">(Event)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, sock)</span>:</span>
+        self.sock = sock
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_yield</span><span class="hljs-params">(self, loop, task)</span>:</span>
+        loop._read_wait(self.sock.fileno(), self, task)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_resume</span><span class="hljs-params">(self, loop, task)</span>:</span>
+        data = self.sock.recv(<span class="hljs-number">1024</span>)
+        loop._ready.append((task, data))
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AcceptEvent</span><span class="hljs-params">(Event)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, sock)</span>:</span>
+        self.sock = sock
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_yield</span><span class="hljs-params">(self, loop, task)</span>:</span>
+        loop._read_wait(self.sock.fileno(), self, task)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_resume</span><span class="hljs-params">(self, loop, task)</span>:</span>
+        r = self.sock.accept()
+        loop._ready.append((task, r))
+</code></pre>
+<p>&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x9664;&#x4E86;&#x7EF4;&#x62A4;&#x4E8B;&#x4EF6;&#x961F;&#x5217;&#x4E4B;&#x5916; , &#x8FD8;&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;&#x5C31;&#x7EEA;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x7528;&#x4E8E;&#x6267;&#x884C;&#x8DDF;&#x4E8B;&#x4EF6;&#x65E0;&#x5173;&#x7684;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#x903B;&#x8F91;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> select
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EventLoop</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        self._num_tasks = <span class="hljs-number">0</span>  <span class="hljs-comment"># Total num of tasks</span>
+        self._ready = deque()  <span class="hljs-comment"># Tasks ready to run</span>
+        self._read_waiting = {}  <span class="hljs-comment"># Tasks waiting to read</span>
+        self._write_waiting = {}  <span class="hljs-comment"># Tasks waiting to write</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_io_poll</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&quot;&quot;&quot;
+        Poll for I/O events and restart waiting tasks
+        &quot;&quot;&quot;</span>
+        <span class="hljs-keyword">if</span> -<span class="hljs-number">1</span> <span class="hljs-keyword">in</span> self._read_waiting:
+            self._read_waiting.pop(-<span class="hljs-number">1</span>)
+
+        <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x8C03;&#x8BD5;&#x6240;&#x4EE5;&#x4F7F;&#x7528;&#x7684;select</span>
+        r_set, w_set, e_set = select.select(self._read_waiting, self._write_waiting, [])
+
+        <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> r_set:
+            event, task = self._read_waiting.pop(r)
+            event._resume(self, task)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">call_soon</span><span class="hljs-params">(self, task)</span>:</span>
+        self._ready.append((task, <span class="hljs-keyword">None</span>))
+        self._num_tasks += <span class="hljs-number">1</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_read_wait</span><span class="hljs-params">(self, fileno, event, task)</span>:</span>
+        <span class="hljs-string">&quot;&quot;&quot;
+        Add a event to the reading set
+        &quot;&quot;&quot;</span>
+        self._read_waiting[fileno] = (event, task)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run_forever</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&apos;&apos;&apos;
+        Run the task eventloop until there are no tasks
+        &apos;&apos;&apos;</span>
+        <span class="hljs-keyword">while</span> self._num_tasks:
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._ready:
+                self._io_poll()
+            task, data = self._ready.popleft()
+            <span class="hljs-keyword">try</span>:
+                <span class="hljs-comment"># Run the coroutine to the next yield</span>
+                r = task.send(data)
+                <span class="hljs-keyword">if</span> isinstance(r, Event):
+                    r._yield(self, task)
+                <span class="hljs-keyword">else</span>:
+                    <span class="hljs-keyword">raise</span> RuntimeError(<span class="hljs-string">&apos;unrecognized yield event&apos;</span>)
+            <span class="hljs-keyword">except</span> StopIteration:
+                self._num_tasks -= <span class="hljs-number">1</span>
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5FAA;&#x73AF;&#x4E0D;&#x65AD;&#x7684;&#x63A5;&#x6536;&#x8BF7;&#x6C42; , &#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x63A5;&#x6536;&#x51FD;&#x6570;&#x4EE5;&#x53CA;&#x5904;&#x7406;&#x51FD;&#x6570;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    <span class="hljs-keyword">import</span> socket
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle_events</span><span class="hljs-params">(conn)</span>:</span>
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+            line = <span class="hljs-keyword">yield</span> ReadEvent(conn)
+            print(line.decode(<span class="hljs-string">&apos;utf-8&apos;</span>))
+            conn.close()
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">server_loop</span><span class="hljs-params">(loop, host, port)</span>:</span>
+        sock = socket.socket()
+        sock.bind((host, port))
+        sock.listen(<span class="hljs-number">5</span>)
+        sock.setblocking(<span class="hljs-keyword">False</span>)
+        print(<span class="hljs-string">&apos;&#x542F;&#x52A8;&#x670D;&#x52A1;&#x7AEF;...&apos;</span>)
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+            conn, a = <span class="hljs-keyword">yield</span> AcceptEvent(sock)
+            print(<span class="hljs-string">&apos;Got connection from &apos;</span>, a)
+            loop.call_soon(handle_events(conn))
+
+
+    loop = EventLoop()
+    loop.call_soon(server_loop(loop, <span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>))
+    loop.run_forever()
+</code></pre>
+<p>&#x5F53;&#x7136;&#x8FD8;&#x6709; <code>client</code> </p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> datetime
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">client</span><span class="hljs-params">(host, port)</span>:</span>
+    sock = socket.socket()
+    sock.connect((host, port))
+    data = {
+        <span class="hljs-string">&apos;send_user&apos;</span>: <span class="hljs-string">&apos;Lyon&apos;</span>,
+        <span class="hljs-string">&apos;send_time&apos;</span>: datetime.datetime.now().strftime(<span class="hljs-string">&apos;%Y-%m-%d %H:%M:%S&apos;</span>),
+        <span class="hljs-string">&apos;send_msg&apos;</span>: <span class="hljs-string">&apos;BIO test...&apos;</span>
+    }
+    sock.send(json.dumps(data).encode(<span class="hljs-string">&apos;utf-8&apos;</span>))
+
+    time.sleep(<span class="hljs-number">5</span>)
+
+    sock.send(json.dumps(data).encode(<span class="hljs-string">&apos;utf-8&apos;</span>))
+    sock.close()
+    print(<span class="hljs-string">&apos;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x6570;&#x636E;&#x6210;&#x529F;...&apos;</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    client(<span class="hljs-string">&apos;localhost&apos;</span>, <span class="hljs-number">8888</span>)
+</code></pre>
+<p>&#x5C31;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x7684;&#x4F18;&#x5316;&#x5C31;&#x5B8C;&#x6210;&#x4E86; , &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x628A;&#x5176;&#x4ED6;&#x8DDF;&#x4E8B;&#x4EF6;&#x65E0;&#x5173;&#x7684;&#x4EFB;&#x52A1;&#x901A;&#x8FC7; <code>call_soon</code> &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x5230; <code>_ready</code> &#x5C31;&#x7EEA;&#x961F;&#x5217;&#x4E2D; , &#x5C31;&#x50CF; <code>server_loop</code> </p>
+<p>&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x5F88;&#x63A5;&#x8FD1; <code>asyncio</code> &#x4E86; , &#x53EA;&#x4E0D;&#x8FC7;&#x6211;&#x4EEC;&#x8981;&#x8FBE;&#x5230;&#x50CF; <code>asyncio</code> &#x652F;&#x6301;&#x7684;&#x90A3;&#x6837; , &#x8FD8;&#x9700;&#x8981;&#x505A;&#x4E0D;&#x5C11;&#x5DE5;&#x4F5C; , &#x6211;&#x4EEC;&#x7684;&#x76EE;&#x7684;&#x662F;&#x53BB;&#x7406;&#x89E3;&#x8FD9;&#x79CD;&#x7F16;&#x7A0B;&#x65B9;&#x5F0F; , &#x6240;&#x4EE5;&#x4E0B;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x4ECB;&#x7ECD; <code>asyncio</code></p>
+<p><strong>&#x53C2;&#x8003;&#x8D44;&#x6599;</strong></p>
+<ul>
+<li>&#x300A;Python Cookbook&#x300B;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="08-协程.html" class="navigation navigation-prev " aria-label="Previous page: 协程">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="09-asyncio.html" class="navigation navigation-next " aria-label="Next page: asyncio">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"AIO协程实现","level":"1.11","depth":1,"next":{"title":"asyncio","level":"1.12","depth":1,"path":"09-asyncio.md","ref":"09-asyncio.md","articles":[]},"previous":{"title":"协程","level":"1.10","depth":1,"path":"08-协程.md","ref":"08-协程.md","articles":[]},"dir":"ltr"},"config":{"plugins":["advanced-emoji","toggle-chapters","theme-comscore","splitter","github","github-buttons@2.1.0","-sharing","-lunr","-search","search-plus","anchor-navigation-ex-toc@0.0.9","editlink","fontsettings","copy-code-button","lightbox","favicon"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/attack-on-backend/tornado"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/attack-on-backend/tornado/blob/master"},"splitter":{},"anchor-navigation-ex-toc":{"associatedWithSummary":true,"float":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showLevel":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"highlight":{},"favicon":{"shortcut":"assets/images/favicom.jpg","bookmark":"assets/images/favicom.jpg","appleTouch":"assets/images/favicom.jpg","appleTouchMore":{"120x120":"assets/images/favicom.jpg","180x180":"assets/images/favicom.jpg"}},"lightbox":{"jquery":true,"sameUuid":false},"theme-comscore":{},"github-buttons":{"repo":"attack-on-backend/tornado","types":["star"],"size":"small"},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"search-plus":{}},"theme":"default","author":"Lyon","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":18,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"进击的Tornado","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null}},"gitbook":"*","description":"Attack on backend","extension":null},"file":{"path":"09-AIO协程实现.md","mtime":"2021-10-20T15:49:27.154Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-20T15:50:17.040Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
